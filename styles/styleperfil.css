@@ -1,0 +1,131 @@
+/*#padre{
+    display: flexbox;
+    flex-direction: row;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(220, 227, 240, 0.37)  ;
+}
+#miperfil{
+    background-color: aqua;
+    width: 30%;
+    float: right;
+}
+#principal{
+    width: 75%;
+    float: right;
+    background-color: rgb(255, 255, 255)  ;}
+#otros{
+    width: 25%;
+    background-color: rgb(255, 255, 255);
+    float: left;
+}
+#campos{
+    opacity: 0.5;
+    margin: 25% 0% 0% 0%;
+}*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    display: flex;
+    background-color: #c8cfdd;
+}
+#cajamenu{
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    height: 100vh;
+}
+#cajamenu img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+#menu {
+    width: 100%;
+}
+#menu a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+#menu a:hover {
+    background-color: #f0f0f0;
+    color: rgb(62, 116, 185);
+    border-right: 2px solid blue;
+
+
+}
+#contenido{
+    flex-grow: 1;
+    padding: 7%;
+}
+#perfil {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    opacity: 0.9;
+    max-width: 500px;
+}
+#contenido h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#informacion{
+    margin-top: 20px;
+}
+
+.encabezado-informacion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#botoneditar{
+    background-color: #007bff;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#botoneditar:hover {
+    background-color: #0056b3;
+}
+
+.informacion-fila {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.informacion-fila p {
+    width: 50%;
+    color: #666;
+}
+
+.informacion-fila p strong {
+    color: black;
+}
+
+.fila-unica {
+    display: block;
+    margin-top: 10px;
+}
