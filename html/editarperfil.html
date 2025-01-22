@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmación de Perfil - Gestión de Gastos</title>
+    <title>Editar perfil</title>
     <link href="../styles/styleperfil.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/editarperfil.css">
 </head>
 <body>
+    <!-- ESTE ES EL CODIGO LA VENTANA CONFIGURACION PERFIL -->
     <div id="cajamenu">
         <img src="../imagen/perfil.webp" alt="Profile Picture">
         <h2>Jessica Straus</h2>
@@ -45,6 +47,36 @@
                 </div>
             </div>
         </div>
-    </div>                  
+    </div>
+    
+    <!-- ACA COMIENZA LA NUEVA VENTANA -->
+
+    <div id="fondo-oscuro"></div>
+
+    <div id="ventana_flotante">
+        <h2>Editar Información de Usuario</h2>
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" placeholder="Nombre" value="Jessica Straus">
+            </div>
+            
+            <div class="form-group">
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" placeholder="Correo" value="jess@taxes.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="contraseña">Contraseña</label>
+                <input type="password" id="contraseña" placeholder="Contraseña" value="12345">
+            </div>
+            
+            <div class="botones-modal">
+                <button type="submit" class="cancelar">Cancelar</button>
+                <button type="submit" class="aceptar">Aceptar</button>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>

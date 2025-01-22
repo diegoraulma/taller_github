@@ -32,17 +32,17 @@
 }
 body {
     display: flex;
-    background-color: #f5f5f5;
+    background-color: #c8cfdd;
 }
 #cajamenu{
     width: 250px;
-            background-color: #ffffff;
-            border-right: 1px solid #ddd;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
-            height: 100vh;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    height: 100vh;
 }
 #cajamenu img {
     width: 80px;
@@ -77,7 +77,8 @@ body {
     background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
-    opacity: 0.5;
+    opacity: 0.9;
+    max-width: 500px;
 }
 #contenido h3 {
     font-size: 20px;
@@ -85,3 +86,46 @@ body {
     color: #333;
 }
 
+#informacion{
+    margin-top: 20px;
+}
+
+.encabezado-informacion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#botoneditar{
+    background-color: #007bff;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#botoneditar:hover {
+    background-color: #0056b3;
+}
+
+.informacion-fila {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.informacion-fila p {
+    width: 50%;
+    color: #666;
+}
+
+.informacion-fila p strong {
+    color: black;
+}
+
+.fila-unica {
+    display: block;
+    margin-top: 10px;
+}
