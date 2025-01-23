@@ -85,3 +85,24 @@
     color: white; /* Texto blanco */
     transition: background-color 0.3s ease; /* Animación suave al pasar el mouse */
 }
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    z-index: 1000; /* Aparece sobre el fondo oscuro */
+    padding: 20px;
+    display: none; /* Oculto por defecto */
+}
+
+/* Mostrar modal */
+.mostrar {
+    display: block;
+}
+

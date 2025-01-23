@@ -1,0 +1,107 @@
+/* Menú lateral */
+nav a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #333;
+}
+
+nav a.activo {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Contenido principal */
+.botones-acciones .btn {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Variación para botones específicos */
+.btn-primario {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-secundario {
+    background-color: #6c757d;
+    color: white;
+}
+
+
+/* Tabla de gastos */
+.tabla-gastos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-gastos thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.tabla-gastos th,
+.tabla-gastos td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.tabla-gastos tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Botones de acción */
+.btn-accion {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-accion.editar {
+    color: #007bff;
+}
+
+.btn-accion.eliminar {
+    color: #dc3545;
+}
+
+/* Encabezado y botones */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#contenido h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.btn.filtrar {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn.exportar {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn.agregar {
+    background-color: #007bff;
+    color: white;
+}
+
