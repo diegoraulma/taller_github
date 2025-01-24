@@ -4,47 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmación de Perfil - Gestión de Gastos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="../styles/styleperfil.css" rel="stylesheet" />
 </head>
 <body>
+    <!-- Menú lateral -->
     <div id="cajamenu">
         <img src="../imagen/perfil.webp" alt="Profile Picture">
         <h2>Jessica Straus</h2>
         <div id="menu">
             <a href="#">Dashboard</a>
-            <a href="#">Gastos</a>
+            <a href="gastos.html">Gastos</a>
             <a href="#">Presupuestos</a>
             <a href="#" class="activo">Configuración</a>
             <a href="#">Salir</a>
         </div>
     </div>   
-  
+
+    <!-- Contenido principal -->
     <div id="contenido">
-        <h3>Mi perfil</h3>
+        <h3 class="fs-4">Mi perfil</h3>
         <div id="perfil">
-            
-            <div id="informacion">
-                <div class="encabezado-informacion">
-                    <p><strong>Informacion personal</strong></p>
-                    <button id="botoneditar">Editar</button>
-                </div>
-                <div class ="informacion-fila">
-                    <p><strong>Nombre</strong></p>
-                    <p><strong>Correo electrónico</strong></p>
-                </div>
-                <div class ="informacion-fila">
+            <div class="encabezado-informacion">
+                <h5>Información personal</h5>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</button>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p><strong>Nombre:</strong></p>
                     <p>Jessica Straus</p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Correo electrónico:</strong></p>
                     <p>jess@taxes.com</p>
                 </div>
-                <div class="informacion-fila fila-unica">
-                    <p><strong>Contraseña</strong></p>
-                </div>
+            </div>
+            <div class="mt-4">
+                <p><strong>Contraseña:</strong></p>
+                <p>12345</p>
+            </div>
+        </div>
+    </div>
 
-                <div class="informacion-fila fila-unica">
-                    <p>12345</p>
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarModalLabel">Editar Información de Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" value="Jessica Straus">
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="correo" value="jess@taxes.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contraseña" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="contraseña" value="12345">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
         </div>
-    </div>                  
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
