@@ -5,23 +5,13 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri"; /* PRESUPUESTOS*/
 import {  FaGear } from "react-icons/fa6"; /* CONFIGURACION*/
 import { IoExitOutline } from "react-icons/io5"; /* SALIR*/
 import './styleperfil.css'; // Importamos nuestro styleperfil.css
+import LateralPageUsuario from '../LateralPage/LateralPageUsuario';
 
 const GastosPage = () => {
     return (
-        <div className = "body">
-            {/* MENU LATERAL*/} 
-            <div id="cajamenu">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="Profile Picture"/>
-                <h2>Jessica Straus</h2>
-                <div id="menu">
-                    <a href="#"><VscGraph className="me-2 fs-2" />Dashboard</a>
-                    <a href="gastos.html"><FaMoneyBills className="me-2 fs-2" />Gastos</a>
-                    <a href="#"><RiMoneyDollarCircleFill className="me-2 fs-2" />Presupuestos</a>
-                    <a href="#" className="activo"><FaGear className="me-2 fs-2" />Configuración</a>
-                    <a href="#"><IoExitOutline className="me-2 fs-2" />Salir</a>
-                </div>
-            </div>
+        <div style={{ display: "flex" }}> 
 
+      <LateralPageUsuario />
             {/* CONTENIDO PRINCIPAL*/}
             <div id="contenido">
                 <header className="d-flex justify-content-between align-items-center mb-4">

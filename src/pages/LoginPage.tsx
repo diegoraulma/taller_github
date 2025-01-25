@@ -1,4 +1,3 @@
-import { createRoot } from 'react-dom/client';
 import './styles.css'; // Importamos nuestro styles.css
 
 const LoginPage = () => {

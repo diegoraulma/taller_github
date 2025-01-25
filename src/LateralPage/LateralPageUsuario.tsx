@@ -2,7 +2,7 @@ import { IoExitOutline } from "react-icons/io5";
 import { FaMoneyBills, FaGear } from "react-icons/fa6";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { VscGraph } from "react-icons/vsc";
-import "../pages/LaterPage.css"
+import "./LaterPage.css"
 
 
 const LateralPageUsuario = () => {
