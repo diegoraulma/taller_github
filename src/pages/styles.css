@@ -59,7 +59,9 @@
     background-color: #6c757d;
     color: white;
 }
-ven{
+
+p {
     font-size: 11px;
     opacity: 0.5;
-    text-align: left;}
+    text-align: justify;
+}
