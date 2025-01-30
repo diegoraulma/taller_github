@@ -1,4 +1,7 @@
 import React from "react";
+import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
+import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aqui esta el menu lateral
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -53,31 +56,7 @@ const DashboardAdministradorPage = () => {
   return (
     <div className="body">
       {/* Menú Lateral */}
-      <div id="cajamenu">
-        <img
-          src="https://via.placeholder.com/100"
-          alt="Profile Picture"
-          className="profile-img"
-        />
-        <h2>Jessica Straus</h2>
-        <div id="menu">
-          <a href="#" className="activo">
-            Dashboard
-          </a>
-          <a href="#">
-            Usuarios
-          </a>
-          <a href="#">
-            Historial
-          </a>
-          <a href="#">
-            Configuración
-          </a>
-          <a href="#">
-            Salir
-          </a>
-        </div>
-      </div>
+      <LateralPageAdministrador/>
 
       {/* Contenido Principal */}
       <div id="contenido">

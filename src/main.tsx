@@ -5,11 +5,16 @@ import LoginPage from './pages/LoginPage'
 import RegistroPage from './pages/RegistroPage'
 import RecuperarPage from './pages/RecuperarPage'
 import ConfirmarPage from './pages/ConfirmarPage'
-import PerfilPage from './pages/PerfilPage'
-import GastosPage from './pages/GastosPage'
 
-import LateralPageUsuario from './LateralPage/LateralPageUsuario'
-import LateralPageAdministrador from './LateralPage/LateralPageAdministrador'
+import PerfilPage from './pagesUsuario/PerfilPage'
+import GastosPage from './pagesUsuario/GastosPage'
+import LateralPageUsuario from './componentes/LateralPageUsuario'
+
+import LateralPageAdministrador from './componentes/LateralPageAdministrador'
+
+import HistorialAdministradorPage from './pagesAdministrador/HistorialAdministradorPage'
+
+import UsuarioAdministradorPage from './pagesAdministrador/UsuarioAdministradorPage'
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
@@ -18,6 +23,6 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-  <GastosPage/>
+  <UsuarioAdministradorPage/>
 </StrictMode>,
 )

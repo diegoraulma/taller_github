@@ -1,4 +1,6 @@
 import React from "react";
+import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
+import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aquí está el menú lateral
 import { FaTrash, FaPlus, FaEdit } from "react-icons/fa";
 
 const HistorialAdministradorPage = () => {
@@ -13,34 +15,10 @@ const HistorialAdministradorPage = () => {
   return (
     <div className="body">
       {/* Menú Lateral */}
-      <div id="cajamenu">
-        <img
-          src="https://via.placeholder.com/100"
-          alt="Profile Picture"
-          className="profile-img"
-        />
-        <h2>Jessica Straus</h2>
-        <div id="menu">
-          <a href="#">
-            Dashboard
-          </a>
-          <a href="#">
-            Usuarios
-          </a>
-          <a href="#" className="activo">
-            Historial
-          </a>
-          <a href="#">
-            Configuración
-          </a>
-          <a href="#">
-            Salir
-          </a>
-        </div>
-      </div>
+      <LateralPageAdministrador />
 
       {/* Contenido Principal */}
-      <div id="contenido">
+      <div id="contenido" className="flex-grow-1 p-4">
         <header className="d-flex justify-content-between align-items-center mb-4">
           <h1 className="fs-4">Historial</h1>
         </header>

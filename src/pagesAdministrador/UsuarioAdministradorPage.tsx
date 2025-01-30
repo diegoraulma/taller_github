@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { FaUsers, FaMoneyBills, FaGear } from "react-icons/fa";
-import { IoExitOutline } from "react-icons/io5";
-import { VscGraph } from "react-icons/vsc";
 import { Modal, Button, Form, Table } from "react-bootstrap";
+import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
+import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aqui esta el menu lateral
 
 type User = {
   id: string;
@@ -47,36 +46,7 @@ const UsuarioAdministradorPage: React.FC = () => {
   return (
     <div className="body">
       {/* Menú Lateral */}
-      <div id="cajamenu">
-        <img
-          src="https://via.placeholder.com/100"
-          alt="Profile Picture"
-          className="profile-img"
-        />
-        <h2>Jessica Straus</h2>
-        <div id="menu">
-          <a href="#">
-            <VscGraph className="me-2 fs-2" />
-            Dashboard
-          </a>
-          <a href="#" className="activo">
-            <FaUsers className="me-2 fs-2" />
-            Usuarios
-          </a>
-          <a href="#">
-            <FaMoneyBills className="me-2 fs-2" />
-            Historial
-          </a>
-          <a href="#">
-            <FaGear className="me-2 fs-2" />
-            Configuración
-          </a>
-          <a href="#">
-            <IoExitOutline className="me-2 fs-2" />
-            Salir
-          </a>
-        </div>
-      </div>
+      <LateralPageAdministrador/>
 
       {/* Contenido Principal */}
       <div id="contenido">
