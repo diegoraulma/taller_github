@@ -48,6 +48,7 @@ const ModalesGasto = () => {
         </div>
       </div>
     </>
+    
   );
 };
 
