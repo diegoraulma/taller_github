@@ -18,12 +18,18 @@ import UsuarioAdministradorPage from './pagesAdministrador/UsuarioAdministradorP
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 
 //AQUI INICIALIZAMOS TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO//
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-  <HistorialAdministradorPage/>
-</StrictMode>,
-)
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/main" element={<PerfilPage />} />
+      </Routes>
+    </BrowserRouter>
+  </StrictMode>
+);
