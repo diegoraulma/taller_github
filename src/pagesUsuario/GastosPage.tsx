@@ -4,6 +4,7 @@ import "jspdf-autotable";  // PARTE DE RODRIGO
 import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
 import LateralPageUsuario from "../componentes/LateralPageUsuario"; // Aqui esta el menu lateral
 import ModalesGasto from "../componentes/ModalesGasto";
+import ModalesFiltrar from "../componentes/ModalesFiltrar";
 
 const GastosPage = () => {
     const exportarCSV = () => {             // PARTE DE RODRIGO
@@ -51,7 +52,7 @@ const GastosPage = () => {
                 <header className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="fs-4">Mis gastos</h1>
                     <div className="d-flex gap-2">
-                        <button className="btn btn-primary">Filtrar</button>
+                        <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarFiltrarModal">Filtrar y Ordenar</button>
                         <div className="btn-group">
                             <button className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
                                 Exportar
@@ -106,6 +107,7 @@ const GastosPage = () => {
 
             {/*MODALES*/}
             <ModalesGasto/>
+            <ModalesFiltrar/>
             
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         </div>

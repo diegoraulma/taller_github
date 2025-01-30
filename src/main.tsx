@@ -17,12 +17,13 @@ import HistorialAdministradorPage from './pagesAdministrador/HistorialAdministra
 import UsuarioAdministradorPage from './pagesAdministrador/UsuarioAdministradorPage'
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 
 //AQUI INICIALIZAMOS TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO//
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-  <UsuarioAdministradorPage/>
+  <GastosPage/>
 </StrictMode>,
 )
