@@ -29,12 +29,12 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        {/* RUTAS DE REGISTRO */}
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Main" element={<PerfilPage />} />
         <Route path="/Registro" element={<RegistroPage />} />
         <Route path="/ConfirmarCorreo" element={<ConfirmarPage />} />
         <Route path="/RecuperarContra" element={<RecuperarPage />} />
+
         {/* RUTAS DE USUARIO */}
         <Route path="/gastos" element={<GastosPage />} />
         <Route path="/presupuestosusu" element={<PresupuestosPage/>} />
@@ -42,6 +42,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/usuarios" element={<UsuarioAdministradorPage />} />
         <Route path="/dashboard" element={<DashboardAdministradorPage />} />
         <Route path="/historial" element={<HistorialAdministradorPage data={[]}/>} />
+
       </Routes>
     </BrowserRouter>
   </StrictMode>
