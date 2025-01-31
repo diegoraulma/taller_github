@@ -1,13 +1,12 @@
+import { Link } from "react-router-dom";
 import { IoExitOutline } from "react-icons/io5"; /* SALIR*/
 import { PiUsersThreeBold } from "react-icons/pi"; /* USUARIOS*/
 import { FaHistory } from "react-icons/fa"; /* GASTOS*/
 import {  FaGear } from "react-icons/fa6"; /* CONFIGURACION*/
 import { VscGraph } from "react-icons/vsc"; /* DASHBOARD*/
 import "./LaterPage.css";
-import { useNavigate } from "react-router-dom";
 
-const LateralPageAdministrador = () => {
-  const navigate = useNavigate()
+const LateralPageAdministrador: React.FC = () => {
   return (
     <div className="bg-light d-flex flex-column align-items-center p-3" style={{ width: "18.6%", height: "100vh" }}>
       {/* Imagen de perfil */}
@@ -22,47 +21,50 @@ const LateralPageAdministrador = () => {
 
       {/* Menú de navegación */}
       <ul className="nav flex-column w-100 mt-4">
-        <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center" href="" 
-          onClick={()=>{
-            navigate("/dashboardadmin")
-          }}>
+      <li className="nav-item">
+          <Link
+            to="/dashboardadmin"
+            className="nav-link text-dark d-flex align-items-center"
+          >
             <VscGraph className="me-2 fs-4" />
             Dashboard
-          </a>
+          </Link>
         </li>
-        <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center" href=""
-          onClick={()=>{
-            navigate("/usuariosadmin")
-          }}>
+        <li className="nav-item">
+          <Link
+            to="/usuariosadmin"
+            className="nav-link text-dark d-flex align-items-center"
+          >
             <PiUsersThreeBold className="me-2 fs-4" />
             Usuarios
-          </a>
+          </Link>
         </li>
-        <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center" href=""
-          onClick={()=>{
-            navigate("/historialadmin")
-          }}>
+        <li className="nav-item">
+          <Link
+            to="/historialadmin"
+            className="nav-link text-dark d-flex align-items-center"
+          >
             <FaHistory className="me-2 fs-4" />
             Historial
-          </a>
+          </Link>
         </li>
-        <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center active" href="">
+        <li className="nav-item">
+          <Link
+            to="/configuracion"
+            className="nav-link text-dark d-flex align-items-center"
+          >
             <FaGear className="me-2 fs-4" />
             Configuración
-          </a>
+          </Link>
         </li>
-        <li className="nav-item opcioneslateral">
-          <a className="nav-link text-danger d-flex align-items-center" href=""
-            onClick={()=>{
-              navigate("/")
-            }}>
+        <li className="nav-item">
+          <Link
+            to="/"
+            className="nav-link text-danger d-flex align-items-center"
+          >
             <IoExitOutline className="me-2 fs-4" />
             Salir
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

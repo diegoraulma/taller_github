@@ -1,19 +1,31 @@
+import { createRoot } from 'react-dom/client';
+import { useNavigate } from "react-router-dom";
 import './styles.css'; // Importamos nuestro styles.css
-import { useNavigate } from 'react-router-dom';
-
+import FormularioRegistro from '../componentes/FormularioRegistro';
+//REGISTRAR NUEVO USUARIO
+//AÑADIR QUE DAR CLICK EN REGISTRAR Y ME MANDE A CONFIRMAR CORREO
 const RegistroPage = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate(); // Hook para redirigir
 
+    const isValidEmail = (email: string): boolean => /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email);
+    
+    const handlerRegistro = (usuario: string, correo: string, password: string) => {
+        if (!usuario || !password || !correo) {
+            // Validación de campos vacíos
+            alert("Campos vacíos");
+        } else if (!isValidEmail(correo)) {
+            // Validación de correo electrónico
+            alert("Correo electrónico no válido");
+        }else {
+           // Redirige a la página de confirmación
+            navigate("/ConfirmarCorreo"); 
+        }
+    };
     return (
         <div className="body">
             <div className="login-container">
                 <h2 className="title">Registro</h2>
-                <input type="user" placeholder="Nombre de usuario" required/>
-                <input type="email" placeholder="Correo de usuario" required/>
-                <input type="password" placeholder="Contraseña" required/>
-                <button className="btn btn-primary" onClick={()=>{
-                    navigate("/confirmacioncorreo")
-                }}>Registrar</button>
+                <FormularioRegistro onRegistro={handlerRegistro} />
             </div>
         </div>
     );

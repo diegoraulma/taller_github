@@ -31,10 +31,10 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         {/* RUTAS DE REGISTRO */}
         <Route path="/" element={<LoginPage />} />
-        <Route path="/main" element={<PerfilPage />} />
-        <Route path="/register" element={<RegistroPage />} />
-        <Route path="/recuperarcontra" element={<RecuperarPage />} />
-        <Route path="/confirmacioncorreo" element={<ConfirmarPage />} />
+        <Route path="/Main" element={<PerfilPage />} />
+        <Route path="/Registro" element={<RegistroPage />} />
+        <Route path="/ConfirmarCorreo" element={<ConfirmarPage />} />
+        <Route path="/RecuperarContra" element={<RecuperarPage />} />
         {/* RUTAS DE USUARIO */}
         <Route path="/gastos" element={<GastosPage />} />
         <Route path="/presupuestosusu" element={<PresupuestosPage/>} />

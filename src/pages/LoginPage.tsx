@@ -8,7 +8,7 @@ const LoginPage = () => {
     const loginHandler = (usuario: string, password: string) => {
         if (usuario === "user" && password === "123") {
             // Login correcto usuario
-            navigate("/main");
+            navigate("/Main");
         }
         else if(usuario === "admin" && password === "123"){
             // Login correcto usuario
@@ -19,7 +19,9 @@ const LoginPage = () => {
             alert("Usuario o contraseña incorrectos");
         }
     };
-
+    const ButtonRegistrarseHandler = () => {
+        navigate("/Registro"); // Redirige a la página de confirmación
+    };
     return (
         <div className="body"> 
             <div className="login-container">
@@ -28,10 +30,9 @@ const LoginPage = () => {
                 <FormularioLogin onLogin={loginHandler} />
                 
                 <div>O</div>
-                <button className="btn btn-secondary"
-                    onClick={()=>{
-                        navigate("/register")
-                    }}>Registrarse</button>
+                <a>
+                    <button className="btn btn-secondary" onClick={ButtonRegistrarseHandler}>Registrarse</button>
+                </a>
             </div>
         </div>
     );
