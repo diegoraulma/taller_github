@@ -21,10 +21,13 @@ const RegistroPage = () => {
             navigate("/ConfirmarCorreo"); 
         }
     };
+    
+
     return (
         <div className="body">
             <div className="login-container">
                 <h2 className="title">Registro</h2>
+                {/* Se pasa la función de registro al formulario */}
                 <FormularioRegistro onRegistro={handlerRegistro} />
             </div>
         </div>

@@ -30,7 +30,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         {/* RUTAS DE REGISTRO */}
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/Login" element={<LoginPage />} />
         <Route path="/Main" element={<PerfilPage />} />
         <Route path="/Registro" element={<RegistroPage />} />
         <Route path="/ConfirmarCorreo" element={<ConfirmarPage />} />
@@ -39,9 +39,9 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/gastos" element={<GastosPage />} />
         <Route path="/presupuestosusu" element={<PresupuestosPage/>} />
         {/* RUTAS DE ADMINISTRADOR */}
-        <Route path="/usuariosadmin" element={<UsuarioAdministradorPage />} />
-        <Route path="/dashboardadmin" element={<DashboardAdministradorPage />} />
-        <Route path="/historialadmin" element={<HistorialAdministradorPage data={[]}/>} />
+        <Route path="/usuarios" element={<UsuarioAdministradorPage />} />
+        <Route path="/dashboard" element={<DashboardAdministradorPage />} />
+        <Route path="/historial" element={<HistorialAdministradorPage data={[]}/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

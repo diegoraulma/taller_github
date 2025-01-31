@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
-import { IoExitOutline } from "react-icons/io5"; /* SALIR*/
-import { PiUsersThreeBold } from "react-icons/pi"; /* USUARIOS*/
-import { FaHistory } from "react-icons/fa"; /* GASTOS*/
-import {  FaGear } from "react-icons/fa6"; /* CONFIGURACION*/
-import { VscGraph } from "react-icons/vsc"; /* DASHBOARD*/
+import React from "react";
+import { Link } from "react-router-dom"; // Para manejar la navegación
+import { IoExitOutline } from "react-icons/io5"; /* SALIR */
+import { PiUsersThreeBold } from "react-icons/pi"; /* USUARIOS */
+import { FaHistory } from "react-icons/fa"; /* HISTORIAL */
+import { FaGear } from "react-icons/fa6"; /* CONFIGURACION */
+import { VscGraph } from "react-icons/vsc"; /* DASHBOARD */
 import "./LaterPage.css";
 
 const LateralPageAdministrador: React.FC = () => {
@@ -23,7 +24,7 @@ const LateralPageAdministrador: React.FC = () => {
       <ul className="nav flex-column w-100 mt-4">
       <li className="nav-item">
           <Link
-            to="/dashboardadmin"
+            to="/dashboard"
             className="nav-link text-dark d-flex align-items-center"
           >
             <VscGraph className="me-2 fs-4" />
@@ -32,7 +33,7 @@ const LateralPageAdministrador: React.FC = () => {
         </li>
         <li className="nav-item">
           <Link
-            to="/usuariosadmin"
+            to="/usuarios"
             className="nav-link text-dark d-flex align-items-center"
           >
             <PiUsersThreeBold className="me-2 fs-4" />
@@ -41,7 +42,7 @@ const LateralPageAdministrador: React.FC = () => {
         </li>
         <li className="nav-item">
           <Link
-            to="/historialadmin"
+            to="/historial"
             className="nav-link text-dark d-flex align-items-center"
           >
             <FaHistory className="me-2 fs-4" />
@@ -59,7 +60,7 @@ const LateralPageAdministrador: React.FC = () => {
         </li>
         <li className="nav-item">
           <Link
-            to="/"
+            to="/salir"
             className="nav-link text-danger d-flex align-items-center"
           >
             <IoExitOutline className="me-2 fs-4" />

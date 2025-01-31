@@ -22,7 +22,7 @@ const FormularioLogin = (props: FormularioLoginProp) => {
     const RecuperarContraHandler = () => {
         navigate("/RecuperarContra"); // Redirige a la página de RecuperarContra
     };
-
+    
     return (
         <form>
             <div>

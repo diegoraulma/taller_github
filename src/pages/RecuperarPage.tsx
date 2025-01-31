@@ -1,6 +1,5 @@
 import './styles.css'; // Importamos nuestro styles.css
 import { useNavigate } from 'react-router-dom';
-
 //NUEVA CONTRASEÑA
 const RecuperarPage = () => {
     const navigate = useNavigate()
@@ -8,6 +7,7 @@ const RecuperarPage = () => {
     const registroHandler = () => {
         navigate("/ConfirmarCorreo"); // Redirige a la página de confirmación
     };
+
     return (
         <div className="body">
             <div className="login-container">

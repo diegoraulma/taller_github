@@ -6,7 +6,7 @@ const ConfirmarPage = () => {
 
     const mainHandler = () => {
         navigate("/Main"); // Redirige a la página de main
-    };   
+    };    
     return (
         <div className="body">
             <div className="login-container">

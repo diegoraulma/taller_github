@@ -6,15 +6,14 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     const loginHandler = (usuario: string, password: string) => {
-        if (usuario === "user" && password === "123") {
-            // Login correcto usuario
+        if (usuario === "20211532@aloe.ulima.edu.pe" && password === "123") {
+            // Login correcto
             navigate("/Main");
         }
         else if(usuario === "admin" && password === "123"){
             // Login correcto usuario
             navigate("/usuariosadmin")
-        }
-        else {
+        } else {
             // Login incorrecto (puedes agregar un mensaje de error aquí)
             alert("Usuario o contraseña incorrectos");
         }
@@ -22,6 +21,7 @@ const LoginPage = () => {
     const ButtonRegistrarseHandler = () => {
         navigate("/Registro"); // Redirige a la página de confirmación
     };
+    
     return (
         <div className="body"> 
             <div className="login-container">
