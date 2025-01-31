@@ -1,31 +1,15 @@
 import React from "react";
-import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
-import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aqui esta el menu lateral
+import "../styles/styleperfil.css';
+import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aquí está el menú lateral
+import TarjetaDashboard from "../componentes/TarjetaDashboard"; // Componente de tarjeta reutilizable
+import GraficoBarras from "../componentes/GraficoBarras"; // Componente de gráfico reutilizable
+import { DatosGrafico, OpcionesGrafico } from "../types";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-const DashboardAdministradorPage = () => {
+const DashboardAdministradorPage: React.FC = () => {
   const totalUsuarios = 12; // Total de usuarios registrados
 
-  const dataUsuariosMes = {
+  // Datos para el gráfico
+  const datosUsuariosMes: DatosGrafico = {
     labels: [
       "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
     ],
@@ -39,7 +23,8 @@ const DashboardAdministradorPage = () => {
     ],
   };
 
-  const options = {
+  // Opciones para el gráfico
+  const opcionesGrafico: OpcionesGrafico = {
     responsive: true,
     plugins: {
       legend: {
@@ -56,7 +41,7 @@ const DashboardAdministradorPage = () => {
   return (
     <div className="body">
       {/* Menú Lateral */}
-      <LateralPageAdministrador/>
+      <LateralPageAdministrador />
 
       {/* Contenido Principal */}
       <div id="contenido">
@@ -65,17 +50,12 @@ const DashboardAdministradorPage = () => {
         </header>
 
         {/* Tarjeta de Usuarios Totales */}
-        <div className="card mb-4">
-          <div className="card-body">
-            <h5 className="card-title">Usuarios Totales</h5>
-            <p className="card-text fs-2 text-center">{totalUsuarios}</p>
-          </div>
-        </div>
+        <TarjetaDashboard titulo="Usuarios Totales" valor={totalUsuarios} />
 
         {/* Gráfico de Usuarios Nuevos */}
         <div className="card">
           <div className="card-body">
-            <Bar data={dataUsuariosMes} options={options} />
+            <GraficoBarras datos={datosUsuariosMes} opciones={opcionesGrafico} />
           </div>
         </div>
       </div>
