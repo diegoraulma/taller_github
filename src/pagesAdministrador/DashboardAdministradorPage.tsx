@@ -1,9 +1,9 @@
 import React from "react";
 import "../styles/styleperfil.css';
-import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aquí está el menú lateral
-import TarjetaDashboard from "../componentes/TarjetaDashboard"; // Componente de tarjeta reutilizable
-import GraficoBarras from "../componentes/GraficoBarras"; // Componente de gráfico reutilizable
-import { DatosGrafico, OpcionesGrafico } from "../types";
+import LateralPageAdministrador from "../componentes/LateralPageAdministrador";
+import TarjetaDashboard from "../componentes/TarjetaDashboard";
+import GraficoBarras from "../componentes/GraficoBarras";
+import { DatosGrafico, OpcionesGrafico } from "../Tipos";
 
 const DashboardAdministradorPage: React.FC = () => {
   const totalUsuarios = 12; // Total de usuarios registrados
