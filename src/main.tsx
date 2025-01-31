@@ -19,6 +19,8 @@ import UsuarioAdministradorPage from './pagesAdministrador/UsuarioAdministradorP
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import DashboardAdministradorPage from './pagesAdministrador/DashboardAdministradorPage'
+import PresupuestosPage from './pagesUsuario/PresupuestoPage'
 
 
 //AQUI INICIALIZAMOS TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO//
@@ -27,8 +29,19 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        {/* RUTAS DE REGISTRO */}
+        <Route path="/" element={<LoginPage />} />
         <Route path="/main" element={<PerfilPage />} />
+        <Route path="/register" element={<RegistroPage />} />
+        <Route path="/recuperarcontra" element={<RecuperarPage />} />
+        <Route path="/confirmacioncorreo" element={<ConfirmarPage />} />
+        {/* RUTAS DE USUARIO */}
+        <Route path="/gastos" element={<GastosPage />} />
+        <Route path="/presupuestosusu" element={<PresupuestosPage/>} />
+        {/* RUTAS DE ADMINISTRADOR */}
+        <Route path="/usuariosadmin" element={<UsuarioAdministradorPage />} />
+        <Route path="/dashboardadmin" element={<DashboardAdministradorPage />} />
+        <Route path="/historialadmin" element={<HistorialAdministradorPage data={[]}/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

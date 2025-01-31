@@ -1,7 +1,9 @@
-import { createRoot } from 'react-dom/client';
 import './styles.css'; // Importamos nuestro styles.css
+import { useNavigate } from 'react-router-dom';
 
 const RegistroPage = () => {
+    const navigate = useNavigate()
+
     return (
         <div className="body">
             <div className="login-container">
@@ -9,7 +11,9 @@ const RegistroPage = () => {
                 <input type="user" placeholder="Nombre de usuario" required/>
                 <input type="email" placeholder="Correo de usuario" required/>
                 <input type="password" placeholder="Contraseña" required/>
-                <button className="btn btn-primary">Registrar</button>
+                <button className="btn btn-primary" onClick={()=>{
+                    navigate("/confirmacioncorreo")
+                }}>Registrar</button>
             </div>
         </div>
     );

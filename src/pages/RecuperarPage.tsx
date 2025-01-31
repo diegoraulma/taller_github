@@ -1,7 +1,9 @@
-import { createRoot } from 'react-dom/client';
 import './styles.css'; // Importamos nuestro styles.css
+import { useNavigate } from 'react-router-dom';
 
 const RecuperarPage = () => {
+    const navigate = useNavigate()
+
     return (
         <div className="body">
             <div className="login-container">
@@ -9,7 +11,10 @@ const RecuperarPage = () => {
                 <input type="new_password" placeholder="Nueva contraseña" required/>
                 <input type="new_password" placeholder="Rescribir nueva contraseña" required/>
                 
-                <a href="confircorreo.html" ><button className="btn btn-primary">Aceptar</button></a>
+                <button className="btn btn-primary"
+                    onClick={()=>{
+                        navigate("/")
+                    }}>Aceptar</button>
             </div>
         </div>
     );

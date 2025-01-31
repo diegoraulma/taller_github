@@ -1,5 +1,6 @@
 .opcioneslateral:hover {
-    background-color: #f0f0f0;
-    color: rgb(62, 116, 185);
-    border-right: 5px solid blue;
-  }
+  background-color: #f0f0f0;
+  color: rgb(62, 116, 185);
+  border-right: 4px solid blue;
+  width: auto;
+}

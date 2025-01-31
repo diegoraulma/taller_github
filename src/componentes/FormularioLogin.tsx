@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface FormularioLoginProp {
     onLogin: (correo: string, password: string) => void;
 }
 
 const FormularioLogin = (props: FormularioLoginProp) => {
+    
+    const navigate = useNavigate()
+
     const [correo, setCorreo] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -36,7 +40,10 @@ const FormularioLogin = (props: FormularioLoginProp) => {
                     required
                 />
             </div>
-            <a href="recuperarcontra.html" className="forgot-password">
+            <a className="forgot-password"
+                onClick={()=>{
+                    navigate("/recuperarcontra")
+                }}>
                 ¿Olvidaste tu contraseña?
             </a>
             <button
