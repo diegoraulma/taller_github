@@ -1,4 +1,3 @@
-import { createRoot } from 'react-dom/client';
 import { useNavigate } from "react-router-dom";
 import './styles.css'; // Importamos nuestro styles.css
 import FormularioRegistro from '../componentes/FormularioRegistro';

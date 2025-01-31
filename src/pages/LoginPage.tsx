@@ -12,7 +12,7 @@ const LoginPage = () => {
         }
         else if(usuario === "admin" && password === "123"){
             // Login correcto usuario
-            navigate("/usuariosadmin")
+            navigate("/usuarios")
         } else {
             // Login incorrecto (puedes agregar un mensaje de error aquí)
             alert("Usuario o contraseña incorrectos");
@@ -21,7 +21,7 @@ const LoginPage = () => {
     const ButtonRegistrarseHandler = () => {
         navigate("/Registro"); // Redirige a la página de confirmación
     };
-    
+
     return (
         <div className="body"> 
             <div className="login-container">

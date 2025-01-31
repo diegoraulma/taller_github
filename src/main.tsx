@@ -8,9 +8,6 @@ import ConfirmarPage from './pages/ConfirmarPage'
 
 import PerfilPage from './pagesUsuario/PerfilPage'
 import GastosPage from './pagesUsuario/GastosPage'
-import LateralPageUsuario from './componentes/LateralPageUsuario'
-
-import LateralPageAdministrador from './componentes/LateralPageAdministrador'
 
 import HistorialAdministradorPage from './pagesAdministrador/HistorialAdministradorPage'
 
@@ -29,7 +26,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/Main" element={<PerfilPage />} />
         <Route path="/Registro" element={<RegistroPage />} />
         <Route path="/ConfirmarCorreo" element={<ConfirmarPage />} />

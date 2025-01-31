@@ -5,6 +5,7 @@ import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
 import LateralPageUsuario from "../componentes/LateralPageUsuario"; // Aqui esta el menu lateral
 import ModalesGasto from "../componentes/ModalesGasto";
 import ModalesFiltrar from "../componentes/ModalesFiltrar";
+import ModalModificar from "../componentes/ModalModificar";
 
 const GastosPage = () => {
     const exportarCSV = () => {             // PARTE DE RODRIGO
@@ -86,10 +87,10 @@ const GastosPage = () => {
                             <td>No</td>
                             <td>S/. 29.99</td>
                             <td>
-                                <button className="btn btn-sm btn-outline-primary">✏️</button>
+                                <button className="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modificarGastoModal">✏️</button>
                                 <button className="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#borrarGastoModal">🗑️</button>
                             </td>
-                        </tr>
+                        </tr>   
                         <tr>
                             <td>02/12/2024</td>
                             <td>Servicios</td>
@@ -97,7 +98,7 @@ const GastosPage = () => {
                             <td>Sí</td>
                             <td>S/. 229.99</td>
                             <td>
-                                <button className="btn btn-sm btn-outline-primary">✏️</button>
+                                <button className="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modificarGastoModal">✏️</button>
                                 <button className="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#borrarGastoModal">🗑️</button>
                             </td>
                         </tr>
@@ -108,6 +109,7 @@ const GastosPage = () => {
             {/*MODALES*/}
             <ModalesGasto/>
             <ModalesFiltrar/>
+            <ModalModificar/>
             
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         </div>

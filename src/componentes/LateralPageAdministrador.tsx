@@ -60,7 +60,7 @@ const LateralPageAdministrador: React.FC = () => {
         </li>
         <li className="nav-item">
           <Link
-            to="/salir"
+            to="/"
             className="nav-link text-danger d-flex align-items-center"
           >
             <IoExitOutline className="me-2 fs-4" />
