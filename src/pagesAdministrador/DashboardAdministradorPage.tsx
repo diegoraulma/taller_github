@@ -4,6 +4,7 @@ import LateralPageAdministrador from "../componentes/LateralPageAdministrador";
 import TarjetaDashboard from "../componentes/TarjetaDashboard";
 import GraficoBarras from "../componentes/GraficoBarras";
 import { DatosGrafico, OpcionesGrafico } from "../TypesDashboardAdministrador";
+import "../styles/styles.css';
 
 const DashboardAdministradorPage: React.FC = () => {
   const totalUsuarios = 12; // Total de usuarios registrados
