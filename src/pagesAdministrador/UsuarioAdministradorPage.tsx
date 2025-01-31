@@ -8,6 +8,7 @@ import ModalEditarUsuario from "../componentes/ModalEditarUsuario";
 import ModalEliminarUsuario from "../componentes/ModalEliminarUsuario";
 import ModalFiltrarUsuario from "../componentes/ModalFiltrarUsuario";
 import "../styles/styles.css";
+import "../styles/stylePerfil.css";
 
 type Usuario = {
   id: string;
