@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-interface FormularioLoginProp {
-    onLogin: (correo: string, password: string) => void;
+interface FormularioRegistroProp {
+    onRegistro: (usuario: string, correo: string, password: string) => void;
 }
 
-const FormularioLogin = (props: FormularioLoginProp) => {
-    const navigate = useNavigate()
-
+const FormularioRegistro = (props: FormularioRegistroProp) => {
+    const [usuario, setUsuario] = useState<string>("");
     const [correo, setCorreo] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+
+    const handleUsuarioChange = (evento: React.ChangeEvent<HTMLInputElement>) => {
+        setUsuario(evento.currentTarget.value);
+    };
 
     const handleCorreoChange = (evento: React.ChangeEvent<HTMLInputElement>) => {
         setCorreo(evento.currentTarget.value);
@@ -19,18 +21,23 @@ const FormularioLogin = (props: FormularioLoginProp) => {
         setPassword(evento.currentTarget.value);
     };
 
-    const RecuperarContraHandler = () => {
-        navigate("/RecuperarContra"); // Redirige a la página de RecuperarContra
-    };
-    
     return (
         <form>
+            <div>
+                <input
+                    type="user"
+                    value={usuario}
+                    onChange={handleUsuarioChange}
+                    placeholder="Crear Nombre de Usuario"
+                    required
+                />
+            </div>
             <div>
                 <input
                     type="email"
                     value={correo}
                     onChange={handleCorreoChange}
-                    placeholder="Ingresar correo"
+                    placeholder="Ingresar Correo"
                     required
                 />
             </div>
@@ -39,22 +46,19 @@ const FormularioLogin = (props: FormularioLoginProp) => {
                     type="password"
                     value={password}
                     onChange={handlePasswordChange}
-                    placeholder="Ingresar contraseña"
+                    placeholder="Crear Contraseña"
                     required
                 />
             </div>
-            <a className="forgot-password" onClick={RecuperarContraHandler}>
-                ¿Olvidaste tu contraseña?
-            </a>
             <button
                 className="btn btn-primary"
                 type="button"
-                onClick={() => props.onLogin(correo, password)}
+                onClick={() => props.onRegistro(usuario, correo, password)}
             >
-                Ingresar
+                Registrar
             </button>
         </form>
     );
 };
 
-export default FormularioLogin;
+export default FormularioRegistro;

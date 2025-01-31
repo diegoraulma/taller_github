@@ -28,7 +28,7 @@ const PerfilPage = () => {
                     </div>
                     <div className="mt-4">
                         <p><strong>Contraseña:</strong></p>
-                        <p>12345</p>
+                        <p>123</p>
                     </div>
                 </div>
             </div>

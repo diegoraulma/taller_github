@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
-import FormularioLogin from "../componentes/FormularioLogin"
->>>>>>> origin/main
+import FormularioLogin from "../componentes/FormularioLogin.tsx"
 import './styles.css'; // Importamos nuestro styles.css
 import { useNavigate } from 'react-router-dom';
 
@@ -11,11 +8,14 @@ const LoginPage = () => {
     const loginHandler = (usuario: string, password: string) => {
         if (usuario === "20211532@aloe.ulima.edu.pe" && password === "123") {
             // Login correcto
-            navigate("/main");
+            navigate("/Main");
         } else {
             // Login incorrecto (puedes agregar un mensaje de error aquí)
             alert("Usuario o contraseña incorrectos");
         }
+    };
+    const ButtonRegistrarseHandler = () => {
+        navigate("/Registro"); // Redirige a la página de confirmación
     };
 
     return (
@@ -26,8 +26,8 @@ const LoginPage = () => {
                 <FormularioLogin onLogin={loginHandler} />
                 
                 <div>O</div>
-                <a href="registro.html">
-                    <button className="btn btn-secondary">Registrarse</button>
+                <a>
+                    <button className="btn btn-secondary" onClick={ButtonRegistrarseHandler}>Registrarse</button>
                 </a>
             </div>
         </div>

@@ -25,10 +25,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/main" element={<PerfilPage />} />
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/Main" element={<PerfilPage />} />
+        <Route path="/Registro" element={<RegistroPage />} />
+        <Route path="/ConfirmarCorreo" element={<ConfirmarPage />} />
+        <Route path="/RecuperarContra" element={<RecuperarPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
