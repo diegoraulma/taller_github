@@ -1,7 +1,7 @@
 import React from "react";
-import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
-import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aquí está el menú lateral
-import TablaHistorial from "../componentes/TablaHistorial"; // Componente de tabla reutilizable
+import "../styles/styles.css";
+import LateralPageAdministrador from "../componentes/LateralPageAdministrador";
+import TablaHistorial from "../componentes/TablaHistorial";
 import { ListadoHistorialItem } from "../types";
 
 const HistorialAdministradorPage: React.FC = () => {
