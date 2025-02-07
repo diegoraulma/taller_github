@@ -5,16 +5,32 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
     const navigate = useNavigate()
 
-    const loginHandler = (usuario: string, password: string) => {
-        if (usuario === "20211532@aloe.ulima.edu.pe" && password === "123") {
+    const loginHandler = async (usuario: string, password: string) => {
+        const userData = {
+            usuario : usuario,
+            password : password
+        }
+        const resp = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            body : JSON.stringify(userData),
+            headers: {  //SOLUCIONA EL ERROR AL LOGIN
+                "Content-Type": "application/json",
+            }
+        })
+        const data = await resp.json()
+        if(data.msg == ""){
             // Login correcto
+            const userJSON = JSON.stringify(userData)
+            console.log(userJSON)
+            sessionStorage.setItem("usuario", userJSON)
             navigate("/Main");
         }
         else if(usuario === "admin" && password === "123"){
             // Login correcto usuario
             navigate("/usuarios")
-        } else {
-            // Login incorrecto (puedes agregar un mensaje de error aquí)
+        }
+        else{
+            // Error en el login
             alert("Usuario o contraseña incorrectos");
         }
     };
