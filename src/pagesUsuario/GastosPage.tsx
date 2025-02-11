@@ -13,10 +13,11 @@ const GastosPage = () => {
     const [gastos, setGastos] = useState<ListadoGastosItem[]>([]);
 
     const httpObtenerGastos = async () => {
-        const url = "http://localhost:5000/gastos";
+        const url = "http://localhost:5000/gastos/";
         try {
             const resp = await fetch(url);
             const data = await resp.json();
+            console.log(data)
             if (data.msg === "") {
                 setGastos(data.gastos);
                 console.log(data.gastos);
@@ -59,7 +60,7 @@ const GastosPage = () => {
             ]),
         });
         doc.save("gastos.pdf");
-    };    
+    };
 
     return (
         <div className="body">

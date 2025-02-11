@@ -10,7 +10,7 @@ const LoginPage = () => {
             usuario : usuario,
             password : password
         }
-        const resp = await fetch("http://localhost:5000/login", {
+        const resp = await fetch("http://localhost:5000/usuarios/login", {
             method: "POST",
             body : JSON.stringify(userData),
             headers: {  //SOLUCIONA EL ERROR AL LOGIN
