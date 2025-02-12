@@ -27,7 +27,11 @@ const ListadoGastos = (props: ListadoGastosProps) => {
                 <tbody>
                     {props.data.map((gasto, index) => (
                         <tr key={index}>
-                            <td>{gasto.fecha}</td>
+                            <td>
+                                {gasto.fecha 
+                                    ? new Date(gasto.fecha).toLocaleDateString("es-PE") 
+                                    : "Fecha no disponible"}
+                            </td>
                             <td>{gasto.categoria}</td>
                             <td>{gasto.descripcion}</td>
                             <td>{gasto.recurrente}</td>
