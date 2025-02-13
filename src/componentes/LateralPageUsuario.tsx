@@ -5,10 +5,42 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri"; /* PRESUPUESTOS*/
 import { VscGraph } from "react-icons/vsc"; /* DASHBOARD*/
 import "./LaterPage.css"
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 
 const LateralPageUsuario = () => {
   const navigate = useNavigate()
+
+  const [usuario, setUsuario] = useState({
+    nombre: "Cargando...",
+  });
+
+  const obtenerUsuario = async () => {
+    const userData = JSON.parse(sessionStorage.getItem("usuario") || "{}");
+    const userId = userData.id || 1; // Obtiene el ID del usuario logueado
+
+    const resp = await fetch(`http://localhost:5000/usuarios/${userId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    const data = await resp.json();    
+    console.log("Respuesta del backend:", data); // 🔹 Imprime la respuesta en la consola
+
+    if (data.msg === "") {
+        console.log("Usuario obtenido:", data);
+        setUsuario(data);
+    } else {
+        console.error("Error al obtener usuario:", data.msg);
+    }
+}
+  useEffect(() => {
+    obtenerUsuario(); // Llamamos a la función al cargar el componente
+  }, []);
+
+
   return (
     <div className="bg-light d-flex flex-column align-items-center p-3" style={{ width: "18.6%", height: "100vh"}}>
       {/* Imagen de perfil */}
@@ -19,7 +51,7 @@ const LateralPageUsuario = () => {
         height="120"
         alt="Profile"
       />
-      <h6 className="fs-4 text-dark">Jessica Straus</h6>
+      <h6 className="fs-4 text-dark">{usuario.nombre}</h6>
 
       {/* Menú de navegación */}
       <ul className="nav flex-column w-100 mt-4">
