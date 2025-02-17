@@ -24,11 +24,14 @@ const PerfilPage = () => {
         const data = await resp.json();    
         console.log("Respuesta del backend:", data); // Imprime la respuesta en la consola
     
-        if (data.msg === "") {
+        if (data && data.nombre) {
             console.log("Usuario obtenido:", data);
-            setUsuario(data);
+            setUsuario({
+                nombre: data.nombre,
+                usuario: data.username,  
+                password: "*****" })
         } else {
-            console.error("Error al obtener usuario:", data.msg);
+            console.error("Error al obtener usuario:", data);
         }
     }
 
@@ -67,7 +70,7 @@ const PerfilPage = () => {
                 </div>
             </div>
             {/*MODALES*/}
-            <ModalesPerfil/>
+            <ModalesPerfil usuario={usuario} />
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         </div>

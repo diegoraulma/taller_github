@@ -20,7 +20,7 @@ const LoginPage = () => {
         const data = await resp.json()
         if(data.msg == ""){
             // Login correcto
-            const userJSON = JSON.stringify({id: data.id, usuario})
+            const userJSON = JSON.stringify({id: data.id, usuario:usuario, password:password})
             console.log(userJSON)
             sessionStorage.setItem("usuario", userJSON)
             navigate("/Main");

@@ -29,11 +29,13 @@ const LateralPageUsuario = () => {
     const data = await resp.json();    
     console.log("Respuesta del backend:", data); // 🔹 Imprime la respuesta en la consola
 
-    if (data.msg === "") {
-        console.log("Usuario obtenido:", data);
-        setUsuario(data);
+    if (data && data.nombre) {
+      console.log("Usuario obtenido:", data);
+      setUsuario({
+          nombre: data.nombre, // Ajusta el campo correcto
+      });
     } else {
-        console.error("Error al obtener usuario:", data.msg);
+        console.error("Error al obtener usuario:", data);
     }
 }
   useEffect(() => {
