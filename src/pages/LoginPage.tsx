@@ -6,23 +6,27 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     const loginHandler = async (usuario: string, password: string) => {
-        const userData = {
-            usuario : usuario,
-            password : password
-        }
-        const resp = await fetch("http://localhost:5000/usuarios/login", {
+        const url = "http://localhost:5000/usuarios/login"
+        const resp = await fetch(url, {
             method: "POST",
-            body : JSON.stringify(userData),
+            body : JSON.stringify({usuario, password}),
             headers: {  //SOLUCIONA EL ERROR AL LOGIN
-                "Content-Type": "application/json",
-            }
+                "Content-Type": "application/json" }
         })
+
         const data = await resp.json()
+        console.log("Respuesta del backend al login:", data); //verificamos qué devuelve el backend
+        
         if(data.msg == ""){
+            console.log("Datos recibidos del backend:", data); //verificamos qué recibimos del backend
             // Login correcto
-            const userJSON = JSON.stringify({id: data.id, usuario:usuario, password:password})
-            console.log(userJSON)
-            sessionStorage.setItem("usuario", userJSON)
+            sessionStorage.setItem("usuario", JSON.stringify({
+                id: data.id, 
+                nombre: data.nombre, 
+                usuario: usuario
+            }));
+        
+            console.log("Usuario guardado en sessionStorage:", sessionStorage.getItem("usuario")); //verificamos que se guardó todo bien
             navigate("/Main");
         }
         else{
@@ -31,14 +35,14 @@ const LoginPage = () => {
         }
     };
     const ButtonRegistrarseHandler = () => {
-        navigate("/Registro"); // Redirige a la página de confirmación
+        navigate("/Registro"); 
     };
 
     return (
         <div className="body"> 
             <div className="login-container">
                 <h2 className="title">Log In</h2>
-                {/* Se pasa la función de login al formulario */}
+                {/*se pasa la función de login al formulario*/}
                 <FormularioLogin onLogin={loginHandler} />
                 
                 <div>O</div>

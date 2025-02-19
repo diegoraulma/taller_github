@@ -11,8 +11,23 @@ const PerfilPage = () => {
     });
 
     const obtenerUsuario = async () => {
-        const userData = JSON.parse(sessionStorage.getItem("usuario") || "{}");
-        const userId = userData.id || 1; // Obtiene el ID del usuario logueado
+        const userData = sessionStorage.getItem("usuario");
+        console.log("Datos en sessionStorage:", userData);  //vemos que datos tiene el sessionStorage
+
+        if (!userData) {
+            console.error("No hay usuario en sesión");
+            return;
+        }
+
+        const usuarioSesion = JSON.parse(userData);
+        console.log("Datos parseados de sessionStorage:", usuarioSesion);
+
+        if (!usuarioSesion.id) {
+            console.error("🚨 No hay usuario en sesión (ID vacío)");
+            return;
+        }
+
+        const userId = usuarioSesion.id;
 
         const resp = await fetch(`http://localhost:5000/usuarios/${userId}`, {
             method: "GET",
@@ -22,16 +37,16 @@ const PerfilPage = () => {
         });
     
         const data = await resp.json();    
-        console.log("Respuesta del backend:", data); // Imprime la respuesta en la consola
+        console.log("Respuesta del backend:", data); //Imprimos la respuesta en la consola
     
-        if (data && data.nombre) {
+        if (data.id) {
             console.log("Usuario obtenido:", data);
             setUsuario({
                 nombre: data.nombre,
                 usuario: data.username,  
                 password: "*****" })
         } else {
-            console.error("Error al obtener usuario:", data);
+            console.error("Error al obtener usuario:", data.msg);
         }
     }
 

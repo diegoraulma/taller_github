@@ -20,7 +20,7 @@ const ModalesGasto = () => {
                   <select className="form-select" id="categoria">
                     <option value="Servicios">Servicios</option>
                     <option value="Alimentación">Alimentación</option>
-                    <option value="Ocio">Ocio</option>
+                    <option value="Ocio">Ocio</option> 
                   </select>
                 </div>
               </form>

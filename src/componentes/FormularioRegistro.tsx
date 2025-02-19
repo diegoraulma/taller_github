@@ -25,7 +25,7 @@ const FormularioRegistro = (props: FormularioRegistroProp) => {
         <form>
             <div>
                 <input
-                    type="user"
+                    type="text"
                     value={usuario}
                     onChange={handleUsuarioChange}
                     placeholder="Crear Nombre de Usuario"
