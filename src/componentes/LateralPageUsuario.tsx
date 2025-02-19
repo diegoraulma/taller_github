@@ -90,6 +90,7 @@ const LateralPageUsuario = () => {
         <li className="nav-item opcioneslateral">
           <a className="nav-link text-danger d-flex align-items-center" href=""
             onClick = {()=>{
+              //Bajarme el storage
               navigate("/")
             }}>
             <IoExitOutline className="me-2 fs-4" />

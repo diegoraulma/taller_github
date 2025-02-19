@@ -1,6 +1,6 @@
 export interface ListadoGastosItem {
     fecha: string;
-    categoria: string;
+    categoriaId: number;
     descripcion: string;
     recurrente: string; 
     monto: number;
@@ -32,7 +32,7 @@ const ListadoGastos = (props: ListadoGastosProps) => {
                                     ? new Date(gasto.fecha).toLocaleDateString("es-PE") 
                                     : "Fecha no disponible"}
                             </td>
-                            <td>{gasto.categoria}</td>
+                            <td>{gasto.categoriaId}</td>
                             <td>{gasto.descripcion}</td>
                             <td>{gasto.recurrente}</td>
                             <td>S/. {gasto.monto.toFixed(2)}</td>
