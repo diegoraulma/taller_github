@@ -5,13 +5,13 @@ const ConfirmarPage = () => {
     const navigate = useNavigate()
 
     const mainHandler = () => {
-        navigate("/Main"); // Redirige a la página de main
+        navigate("/"); // Redirige a la página de main
     };    
     return (
         <div className="body">
             <div className="login-container">
                 <h2 className="title">Confirmación correo electrónico</h2>
-                <p>Un correo electronico de confirmación, a sido enviado a la dirección de correo registrada en la aplicación.
+                <p>Un correo electronico de confirmación, ha sido enviado a la dirección de correo registrada en la aplicación.
                     Agradeceremos que confirme su dirección de autenticarce.</p>
                 <p> Gracias </p>
                 <button className="btn btn-primary" onClick={mainHandler}>Continuar</button>

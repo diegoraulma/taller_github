@@ -89,9 +89,9 @@ const LateralPageUsuario = () => {
         </li>
         <li className="nav-item opcioneslateral">
           <a className="nav-link text-danger d-flex align-items-center" href=""
-            onClick = {()=>{
-              //Bajarme el storage
-              navigate("/")
+            onClick={() => {
+              sessionStorage.removeItem("usuario");  // ❌ Elimina el usuario del almacenamiento
+              navigate("/"); // 🔄 Redirige al login
             }}>
             <IoExitOutline className="me-2 fs-4" />
             Salir

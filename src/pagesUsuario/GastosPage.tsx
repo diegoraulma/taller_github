@@ -4,15 +4,18 @@ import autoTable from "jspdf-autotable";
 import "../pages/styleperfil.css"; // Importamos nuestro styleperfil.css
 import LateralPageUsuario from "../componentes/LateralPageUsuario"; // Aquí está el menú lateral
 import ListadoGastos, { ListadoGastosItem } from "../componentes/ListadoGastos";
-import ModalesGasto, { Categoria } from "../componentes/ModalesGasto";
 import ModalesFiltrar from "../componentes/ModalesFiltrar";
 import ModalModificar from "../componentes/ModalModificar";
 import { useEffect, useState } from "react";
+import ModalAgregarGasto, { Categoria } from "../componentes/ModalAgregarGasto";
+import ModalBorrarGasto from "../componentes/ModalBorrarGasto";
+
 
 const GastosPage = () => {
     const [gastos, setGastos] = useState<ListadoGastosItem[]>([]);
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const [showModalGasto, setShowModalGasto] = useState<boolean>(false);
+    const [showModalBorrar, setShowModalBorrar] = useState<boolean>(false);
 
     const httpObtenerGastos = async () => {
         const url = "http://localhost:5000/gastos/";
@@ -80,12 +83,19 @@ const GastosPage = () => {
     }, []);
 
     const openModalGasto = () => {
-        console.log("Abriendo modal de gasto...");
         setShowModalGasto(true)
     }
 
     const closeModalGasto = () => {
         setShowModalGasto(false)
+    }
+
+    const openModalBorrar = () => {
+        setShowModalBorrar(true)
+    }
+
+    const closeModalBorrar = () => {
+        setShowModalBorrar(false)
     }
 
     const exportarCSV = () => {
@@ -127,7 +137,7 @@ const GastosPage = () => {
                 <header className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="fs-4">Mis gastos</h1>
                     <div className="d-flex gap-2">
-                        <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarFiltrarModal">
+                    <button className="btn btn-primary">
                             Filtrar y Ordenar
                         </button>
                         <div className="btn-group">
@@ -157,14 +167,21 @@ const GastosPage = () => {
                 <ListadoGastos data={gastos} categorias={categorias} />
             </div>
 
-            <ModalesGasto 
-                showModal={showModalGasto}
-                categorias={categorias}
-                onCloseModal={closeModalGasto}
+            <ModalAgregarGasto 
+                showModal={showModalGasto} 
+                onCloseModal={closeModalGasto} 
                 onGuardarGasto={async (nuevoGasto) => {
                     await httpGuardarGasto(nuevoGasto);
                     await httpObtenerGastos();
-                }}
+                    closeModalGasto();
+                }} 
+                categorias={categorias}
+            />
+
+            <ModalBorrarGasto 
+                showModal={showModalBorrar} 
+                onCloseModal={closeModalBorrar} 
+                onBorrarGasto={() => console.log("Eliminar gasto")} 
             />
             <ModalesFiltrar />
             <ModalModificar />
