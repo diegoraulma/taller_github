@@ -4,23 +4,25 @@ import autoTable from "jspdf-autotable";
 import "../pages/styleperfil.css"; // Importamos nuestro styleperfil.css
 import LateralPageUsuario from "../componentes/LateralPageUsuario"; // Aquí está el menú lateral
 import ListadoGastos, { ListadoGastosItem } from "../componentes/ListadoGastos";
-import ModalesGasto from "../componentes/ModalesGasto";
+import ModalesGasto, { Categoria } from "../componentes/ModalesGasto";
 import ModalesFiltrar from "../componentes/ModalesFiltrar";
 import ModalModificar from "../componentes/ModalModificar";
 import { useEffect, useState } from "react";
 
 const GastosPage = () => {
     const [gastos, setGastos] = useState<ListadoGastosItem[]>([]);
+    const [categorias, setCategorias] = useState<Categoria[]>([]);
+    const [showModalGasto, setShowModalGasto] = useState<boolean>(false);
 
     const httpObtenerGastos = async () => {
         const url = "http://localhost:5000/gastos/";
         try {
             const resp = await fetch(url);
             const data = await resp.json();
-            console.log(data)
+            console.log(data)   //Comprobamos la data
             if (data.msg === "") {
                 setGastos(data.gastos);
-                console.log(data.gastos);
+                console.log(data.gastos);   //Comprobamos la data
             } else {
                 console.error(`Error al obtener gastos: ${data.msg}`);
             }
@@ -29,14 +31,67 @@ const GastosPage = () => {
         }
     };
 
+    const httpObtenerCategorias = async () => {
+        const url = "http://localhost:5000/categorias"
+        const resp = await fetch(url)
+        const data = await resp.json()
+        if(data.msg == ""){
+            const listaCategorias = data.categorias
+            setCategorias(listaCategorias)
+        }
+        else{
+            console.error(`Error al obtener las categorias: ${data.msg}`)
+        }
+    }
+
+    const httpGuardarGasto = async (nuevoGasto: ListadoGastosItem) => {
+        const url = "http://localhost:5000/gastos"; // Asegurar que esta URL es correcta
+        try {
+            console.log("Intentando guardar gasto:", nuevoGasto);
+            const resp = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(nuevoGasto),
+            });
+    
+            if (!resp.ok) {
+                throw new Error(`Error HTTP: ${resp.status}`);
+            }
+    
+            const data = await resp.json();
+            console.log("Respuesta del backend:", data);
+    
+            if (data.msg === "") {
+                console.log("Gasto guardado con éxito");
+                httpObtenerGastos(); // Recargar la lista de gastos
+            } else {
+                console.error(`Error al guardar gasto: ${data.msg}`);
+            }
+        } catch (error) {
+            console.error("Error al conectar con el servidor:", error);
+        }
+    };
+    
     useEffect(() => {
         httpObtenerGastos();
+        httpObtenerCategorias()
     }, []);
+
+    const openModalGasto = () => {
+        console.log("Abriendo modal de gasto...");
+        setShowModalGasto(true)
+    }
+
+    const closeModalGasto = () => {
+        setShowModalGasto(false)
+    }
 
     const exportarCSV = () => {
         let csv = "Fecha,Categoría,Descripción,Recurrente,Monto\n";
         gastos.forEach((gasto) => {
-            csv += `${gasto.fecha},${gasto.categoria},${gasto.descripcion},${gasto.recurrente},${gasto.monto}\n`;
+            csv += `${gasto.fecha},${gasto.categoriaId},${gasto.descripcion},${gasto.recurrente},${gasto.monto}\n`;
         });
 
         const blob = new Blob([csv], { type: "text/csv" });
@@ -53,7 +108,7 @@ const GastosPage = () => {
             head: [["Fecha", "Categoría", "Descripción", "Recurrente", "Monto"]],
             body: gastos.map((gasto) => [
                 gasto.fecha,
-                gasto.categoria,
+                gasto.categoriaId,
                 gasto.descripcion,
                 gasto.recurrente,
                 gasto.monto,
@@ -92,18 +147,25 @@ const GastosPage = () => {
                                 </li>
                             </ul>
                         </div>
-                        <button className="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarGastoModal">
+                        <button className="btn btn-success" onClick={openModalGasto}>
                             Agregar
                         </button>
                     </div>
                 </header>
 
                 {/* Tabla de gastos */}
-                <ListadoGastos data={gastos} />
+                <ListadoGastos data={gastos} categorias={categorias} />
             </div>
 
-            {/* Modales */}
-            <ModalesGasto />
+            <ModalesGasto 
+                showModal={showModalGasto}
+                categorias={categorias}
+                onCloseModal={closeModalGasto}
+                onGuardarGasto={async (nuevoGasto) => {
+                    await httpGuardarGasto(nuevoGasto);
+                    await httpObtenerGastos();
+                }}
+            />
             <ModalesFiltrar />
             <ModalModificar />
 
