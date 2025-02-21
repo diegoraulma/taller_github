@@ -6,32 +6,31 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     const loginHandler = async (usuario: string, password: string) => {
-        const url = "http://localhost:5000/usuarios/login"
-        const resp = await fetch(url, {
-            method: "POST",
-            body : JSON.stringify({usuario, password}),
-            headers: {  //SOLUCIONA EL ERROR AL LOGIN
-                "Content-Type": "application/json" }
-        })
-
-        const data = await resp.json()
-        console.log("Respuesta del backend al login:", data); //verificamos qué devuelve el backend
-        
-        if(data.msg == ""){
-            console.log("Datos recibidos del backend:", data); //verificamos qué recibimos del backend
-            // Login correcto
-            sessionStorage.setItem("usuario", JSON.stringify({
-                id: data.id, 
-                nombre: data.nombre, 
-                usuario: usuario
-            }));
-        
-            console.log("Usuario guardado en sessionStorage:", sessionStorage.getItem("usuario")); //verificamos que se guardó todo bien
-            navigate("/Main");
-        }
-        else{
-            // Error en el login
-            alert("Usuario o contraseña incorrectos");
+        const url = "http://localhost:5000/usuarios/login";
+        try {
+            const resp = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify({ usuario, password }),
+                headers: { "Content-Type": "application/json" }
+            });
+    
+            const data = await resp.json();
+            console.log("Respuesta del backend al login:", data);
+    
+            if (resp.ok && data.msg === "") {
+                sessionStorage.setItem("usuario", JSON.stringify({
+                    id: data.id,
+                    nombre: data.nombre,
+                    usuario
+                }));
+                alert("Inicio de sesión exitoso. Se ha enviado un correo de confirmación.");
+                navigate("/Main");
+            } else {
+                alert("Correo o contraseña incorrectos.");
+            }
+        } catch (error) {
+            console.error("Error en login:", error);
+            alert("Error al conectar con el servidor.");
         }
     };
     const ButtonRegistrarseHandler = () => {
