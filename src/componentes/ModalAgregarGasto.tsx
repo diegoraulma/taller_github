@@ -33,11 +33,12 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
   };
 
   const recurrenteChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRecurrente(e.target.checked);
-  }
+    setRecurrente(e.target.checked); //True si esta marcado si está marcado, False en caso contrario
+  };
 
   const montoChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMonto(parseFloat(e.target.value));
+    const valor = e.target.value.trim();  //eliminamos los espacios en blanco
+    setMonto(valor === "" ? 0 : parseFloat(valor) || 0); //si está vacío o no es número, sera 0
   };
 
   const handleGuardarGasto = () => {
@@ -46,7 +47,7 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
       categoriaId,
       descripcion,
       recurrente: recurrente ? "Sí" : "No", // Convierte booleano en texto
-      monto: isNaN(monto) ? 0 : monto // Evitar NaN
+      monto
     };
   
     console.log("Enviando gasto al backend:", nuevoGasto);

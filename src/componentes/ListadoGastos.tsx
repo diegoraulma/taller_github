@@ -32,7 +32,7 @@ const ListadoGastos = ({ data, categorias }: ListadoGastosProps) => {
                         <td>{new Date(gasto.fecha).toLocaleDateString("es-PE")}</td>
                         <td>{categorias.find((c) => c.id === gasto.categoriaId)?.nombre || "Desconocido"}</td>
                         <td>{gasto.descripcion}</td>
-                        <td>{gasto.recurrente === "true" ? "Sí" : "No"}</td>
+                        <td>{gasto.recurrente}</td>
                         <td>S/. {gasto.monto.toFixed(2)}</td>
                         <td>
                             <button className="btn btn-sm btn-outline-primary">✏️</button>
