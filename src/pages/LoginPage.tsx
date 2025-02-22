@@ -5,13 +5,31 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
     const navigate = useNavigate()
 
-    const loginHandler = (usuario: string, password: string) => {
-        if (usuario === "20211532@aloe.ulima.edu.pe" && password === "123") {
-            // Login correcto
-            navigate("/main");
-        } else {
-            // Login incorrecto (puedes agregar un mensaje de error aquí)
-            alert("Usuario o contraseña incorrectos");
+    const loginHandler = async (usuario: string, password: string) => {
+        console.log("🔹 Datos enviados:", { usuario, password });
+    
+        try {
+            const response = await fetch("http://localhost:5000/usuarios/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ usuario, password })
+            });
+    
+            const data = await response.json();
+            console.log("🔹 Respuesta del backend:", data);
+    
+            if (data.id) {
+                // Login correcto, redirigir al usuario
+                navigate("/main");
+            } else {
+                // Login incorrecto
+                alert("Usuario o contraseña incorrectos");
+            }
+        } catch (error) {
+            console.error("🔹 Error en la petición:", error);
+            alert("Hubo un problema con el servidor.");
         }
     };
 
