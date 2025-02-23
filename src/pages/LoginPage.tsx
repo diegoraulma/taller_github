@@ -21,10 +21,21 @@ const LoginPage = () => {
                 sessionStorage.setItem("usuario", JSON.stringify({
                     id: data.id,
                     nombre: data.nombre,
-                    usuario
+                    username: data.username,
+                    estado: data.estado,
+                    rol: data.rol
                 }));
                 alert("Inicio de sesión exitoso. Se ha enviado un correo de confirmación.");
-                navigate("/Main");
+                
+                const storedUsuario = sessionStorage.getItem("usuario");
+                const usuarioData = storedUsuario ? JSON.parse(storedUsuario) : null;
+                
+                if (usuarioData?.rol === "Admin") {
+                    navigate("/usuarios");
+                } else {
+                    navigate("/Main");
+                }
+                
             } else {
                 alert("Correo o contraseña incorrectos.");
             }
