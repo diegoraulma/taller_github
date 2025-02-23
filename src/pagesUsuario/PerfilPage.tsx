@@ -5,56 +5,52 @@ import { useEffect, useState } from "react";
 
 const PerfilPage = () => {
     const [usuario, setUsuario] = useState({
+        id: null,  // Agregamos el ID
         nombre: "Cargando...",
         usuario: "Cargando...",
         password: "*****"
     });
-
+    
     const obtenerUsuario = async () => {
         const userData = sessionStorage.getItem("usuario");
-        console.log("Datos en sessionStorage:", userData);  // Vemos qué datos tiene sessionStorage
-
+    
         if (!userData) {
             console.error("No hay usuario en sesión");
             return;
         }
-
+    
         const usuarioSesion = JSON.parse(userData);
-        console.log("Datos parseados de sessionStorage:", usuarioSesion);
-
+    
         if (!usuarioSesion.id) {
-            console.error("🚨 No hay usuario en sesión (ID vacío)");
+            console.error("🚨 No hay ID de usuario en sesión");
             return;
         }
-
+    
         const userId = usuarioSesion.id;
-
-        const resp = await fetch(`http://localhost:5000/usuarios/${userId}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
+    
+        try {
+            const resp = await fetch(`http://localhost:5000/usuarios/${userId}`);
+            const data = await resp.json();
+    
+            if (data.id) {
+                setUsuario({
+                    id: data.id,  // Guardamos el ID
+                    nombre: data.nombre,
+                    usuario: data.username,  
+                    password: "*****"  
+                });
+            } else {
+                console.error("Error al obtener usuario:", data.msg);
             }
-        });
-    
-        const data = await resp.json();    
-        console.log("Respuesta del backend:", data); // Imprimimos la respuesta en la consola
-    
-        if (data.id) {
-            console.log("Usuario obtenido:", data);
-            setUsuario({
-                nombre: data.nombre,
-                usuario: data.username,  
-                password: "*****"  // No mostramos la contraseña real
-            });
-        } else {
-            console.error("Error al obtener usuario:", data.msg);
+        } catch (error) {
+            console.error("Error de conexión con el backend:", error);
         }
     };
-
+    
     useEffect(() => {
-        obtenerUsuario(); // Llamamos a la función al cargar el componente
+        obtenerUsuario();
     }, []);
-
+    
     return (
         <div className='body'> 
            {/* MENU LATERAL */} 
