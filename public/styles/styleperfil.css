@@ -75,3 +75,24 @@
     #botoneditar:hover {
         background-color: #0056b3;
     }
+
+.card {
+  border-radius: 0.5rem;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+#contenido {
+  padding: 2rem;
+  margin-left: 250px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.display-4 {
+  font-size: 2.5rem;
+}
