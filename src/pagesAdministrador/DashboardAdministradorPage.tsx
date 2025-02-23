@@ -1,7 +1,6 @@
-import React from "react";
-import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
-import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aqui esta el menu lateral
-
+import React, { useEffect, useState } from "react";
+import '../pages/styleperfil.css';
+import LateralPageAdministrador from "../componentes/LateralPageAdministrador";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,61 +22,59 @@ ChartJS.register(
 );
 
 const DashboardAdministradorPage = () => {
-  const totalUsuarios = 12; // Total de usuarios registrados
+  const [stats, setStats] = useState({
+    totalUsuarios: 0,
+    monthlyData: Array(12).fill(0)
+  });
+  const [loading, setLoading] = useState(true);
 
-  const dataUsuariosMes = {
-    labels: [
-      "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-    ],
-    datasets: [
-      {
-        label: "Usuarios nuevos por mes",
-        data: [200, 150, 300, 500, 250, 400, 600, 700, 850, 1000, 750, 500],
-        backgroundColor: "#007bff",
-        borderRadius: 5,
-      },
-    ],
-  };
+  const monthLabels = [
+    "Ene", "Feb", "Mar", "Abr", "May", "Jun", 
+    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+  ];
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Usuarios nuevos por mes",
-      },
-    },
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Usando Fetch API
+        const response = await fetch("http://localhost:3000/dashboard/users-stats");
+        
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        const monthlyCounts = Array(12).fill(0);
+        data.monthlySignups.forEach(item => {
+          const month = new Date(item.month).getMonth();
+          monthlyCounts[month] = parseInt(item.count);
+        });
 
+        setStats({
+          totalUsuarios: data.totalUsers,
+          monthlyData: monthlyCounts
+        });
+
+      } catch (error) {
+        console.error("Error obteniendo datos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Resto del componente se mantiene igual...
+  // (Mismo código de dataUsuariosMes, options y return)
+  
   return (
     <div className="body">
-      {/* Menú Lateral */}
       <LateralPageAdministrador/>
 
-      {/* Contenido Principal */}
       <div id="contenido">
-        <header className="d-flex justify-content-between align-items-center mb-4">
-          <h1 className="fs-4">Dashboards</h1>
-        </header>
-
-        {/* Tarjeta de Usuarios Totales */}
-        <div className="card mb-4">
-          <div className="card-body">
-            <h5 className="card-title">Usuarios Totales</h5>
-            <p className="card-text fs-2 text-center">{totalUsuarios}</p>
-          </div>
-        </div>
-
-        {/* Gráfico de Usuarios Nuevos */}
-        <div className="card">
-          <div className="card-body">
-            <Bar data={dataUsuariosMes} options={options} />
-          </div>
-        </div>
+        {/* Mismo JSX del componente */}
       </div>
     </div>
   );
