@@ -9,7 +9,7 @@ const RegistroPage = () => {
     const isValidEmail = (email: string): boolean => /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email);
 
     const httpRegistrarUsuario = async (nombreUsuario : string, passwordUsuario : string, correoUsuario : string) => {
-        const url = "http://localhost:5000/usuarios";
+        const url = "http://localhost:5000/usuarios/register";
         const resp = await fetch(url, {
             method : "POST",
             headers: {
@@ -17,7 +17,7 @@ const RegistroPage = () => {
             },
             body: JSON.stringify({
                 nombre: nombreUsuario,
-                usuario: correoUsuario, //recordar que el Backend espera "usuario" como correo
+                username: correoUsuario, //recordar que el Backend espera "usuario" como correo
                 password: passwordUsuario
             })
         })

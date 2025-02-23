@@ -8,6 +8,8 @@ import { VscGraph } from "react-icons/vsc"; /* DASHBOARD */
 import "./LaterPage.css";
 
 const LateralPageAdministrador: React.FC = () => {
+  const storedUsuario = JSON.parse(sessionStorage.getItem("usuario") || "{}")
+
   return (
     <div className="bg-light d-flex flex-column align-items-center p-3" style={{ width: "18.6%", height: "100vh" }}>
       {/* Imagen de perfil */}
@@ -18,7 +20,7 @@ const LateralPageAdministrador: React.FC = () => {
         height="120"
         alt="Profile"
       />
-      <h6 className="fs-4 text-dark">Jessica Straus</h6>
+      <h6 className="fs-4 text-dark">{storedUsuario.nombre}</h6>
 
       {/* Menú de navegación */}
       <ul className="nav flex-column w-100 mt-4">
