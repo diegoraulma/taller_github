@@ -58,6 +58,7 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
   return (
     <>
       {/* Modal Agregar Gasto */}
+      {props.showModal && <div className="modal-backdrop show"></div>}
       <div className={`modal fade ${props.showModal ? "show d-block" : ""}`} 
            id="agregarGastoModal"
            tabIndex={-1} 
