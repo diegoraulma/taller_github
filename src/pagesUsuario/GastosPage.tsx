@@ -3,7 +3,8 @@ import autoTable from "jspdf-autotable";
 import "../pages/styleperfil.css"; // Importamos nuestro styleperfil.css
 import LateralPageUsuario from "../componentes/LateralPageUsuario"; // Menú lateral
 import ListadoGastos, { ListadoGastosItem } from "../componentes/ListadoGastos";
-import ModalesFiltrar from "../componentes/ModalesFiltrar";
+import ModalFiltrarGastos from "../componentes/ModalFiltrar";
+import ModalOrdenarGastos from "../componentes/ModalOrdenarGastos";
 import ModalModificar from "../componentes/ModalModificar";
 import { useEffect, useState } from "react";
 import ModalAgregarGasto, { Categoria } from "../componentes/ModalAgregarGasto";
@@ -16,6 +17,8 @@ const GastosPage = () => {
     const [showModalGasto, setShowModalGasto] = useState<boolean>(false);
     const [showModalBorrar, setShowModalBorrar] = useState<boolean>(false);
     const [gastoSeleccionado, setGastoSeleccionado] = useState<number | null>(null); // 🔹 Guardar el ID del gasto a eliminar
+    const [showModalOrdenar, setShowModalOrdenar] = useState<boolean>(false);
+    const [showModalFiltrar, setShowModalFiltrar] = useState<boolean>(false);
 
     const httpObtenerGastos = async () => {
         const url = "http://localhost:5000/gastos/";
@@ -29,6 +32,45 @@ const GastosPage = () => {
             }
         } catch (error) {
             console.error("Error al conectar con el servidor:", error);
+        }
+    };
+
+    useEffect(() => {
+        obtenerGastos();
+    }, []);
+
+    useEffect(() => {
+        obtenerGastosFiltro({ tipo: "fecha", valor: "2024-05-19" }); // Valor de prueba
+    }, []);
+    
+
+    const obtenerGastos = async (orden = "fecha") => {
+        try {
+            const resp = await axios.get(`http://localhost:5000/gastos?orden=${orden}`);
+            setGastos(resp.data.gastos);
+        } catch (error) {
+            console.error("Error al obtener gastos:", error);
+        }
+    };
+
+    const obtenerGastosFiltro = async ({ tipo, valor }: { tipo: string; valor: string }) => {
+        if (!tipo) {
+            console.error("Error: Falta el tipo de filtro.");
+            return;
+        }
+    
+        const url = valor
+            ? `http://localhost:5000/gastos?filtro=${tipo}&valor=${valor}`
+            : `http://localhost:5000/gastos?filtro=${tipo}`;
+    
+        console.log(`Consultando API con filtro: Tipo=${tipo}, Valor=${valor || "Todos"}`);
+    
+        try {
+            const resp = await axios.get(url);
+            console.log("Respuesta del servidor:", resp.data);
+            setGastos(resp.data.gastos);
+        } catch (error) {
+            console.error("Error al obtener gastos:", error);
         }
     };
 
@@ -142,7 +184,12 @@ const GastosPage = () => {
                 <header className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="fs-4">Mis gastos</h1>
                     <div className="d-flex gap-2">
-                        <button className="btn btn-primary">Filtrar y Ordenar</button>
+                    <button className="btn btn-primary" onClick={() => setShowModalOrdenar(true)}>
+                    Ordenar
+                    </button>
+                    <button className="btn btn-primary" onClick={() => setShowModalFiltrar(true)}>
+                    Filtrar
+                    </button>
                         <div className="btn-group">
                             <button className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
                                 Exportar
@@ -181,13 +228,24 @@ const GastosPage = () => {
                 categorias={categorias}
             />
 
+            <ModalFiltrarGastos
+                showModal={showModalFiltrar}
+                onCloseModal={() => setShowModalFiltrar(false)}
+                onAplicarFiltro={obtenerGastosFiltro}
+            />
+
+            <ModalOrdenarGastos
+                showModal={showModalOrdenar}
+                onCloseModal={() => setShowModalOrdenar(false)}
+                onAplicarOrden={obtenerGastos}
+            />
+
             <ModalBorrarGasto
                 showModal={showModalBorrar}
                 onCloseModal={closeModalBorrar}
                 onBorrarGasto={httpEliminarGasto}
             />
 
-            <ModalesFiltrar />
             <ModalModificar />
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
