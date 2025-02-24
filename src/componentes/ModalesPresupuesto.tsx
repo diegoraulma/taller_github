@@ -24,6 +24,9 @@ interface ModalesPresupuestoProps {
     httpGuardarPresupuesto: (nuevoPpto: Presupuesto) => void;
     httpEditarPresupuesto: (id: number, pptoActualizado: Presupuesto) => void;
     httpEliminarPresupuesto: (id: number) => void;
+    showAlertas: boolean; // Nuevo prop para mostrar el modal de alertas
+    closeAlertas: () => void; // Nuevo prop para cerrar el modal de alertas
+    alertas: { mensaje: string }[]; // Nuevo prop para las alertas
 }
 
 const ModalesPresupuesto = (props: ModalesPresupuestoProps) => {
@@ -164,6 +167,29 @@ const ModalesPresupuesto = (props: ModalesPresupuestoProps) => {
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" onClick={props.closeModalEliminar}>No</button>
                         <button type="button" className="btn btn-primary" onClick={handleEliminarPresupuesto}>Sí</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {/* Modal de Alertas */}
+        {props.showAlertas && <div className="modal-backdrop show"></div>}
+        <div className={`modal ${props.showAlertas ? "d-block" : "d-none"}`} tabIndex={-1}>
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Alertas de Presupuesto</h5>
+                        <button type="button" className="btn-close" onClick={props.closeAlertas}></button>
+                    </div>
+                    <div className="modal-body">
+                        {props.alertas.map((alerta, index) => (
+                            <div key={index} className="alert alert-warning">
+                                {alerta.mensaje}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" onClick={props.closeAlertas}>Cerrar</button>
                     </div>
                 </div>
             </div>
