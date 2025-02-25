@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Categoria } from "./ModalAgregarGasto";
-import axios from "axios";
-import ModalBorrarGasto from "./ModalBorrarGasto"; // 🔹 Importamos el modal
+// import axios from "axios";
+import ModalBorrarGasto from "./ModalBorrarGasto";
 
 export interface ListadoGastosItem {
     id: number;
@@ -22,28 +22,40 @@ const ListadoGastos = ({ data, categorias, onDelete }: ListadoGastosProps) => {
     const [gastoSeleccionado, setGastoSeleccionado] = useState<number | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
 
-    // 🔹 Abrir modal y guardar el gasto a eliminar
+    // Abrir modal y guardar el gasto a eliminar
     const abrirModalEliminar = (id: number) => {
         setGastoSeleccionado(id);
         setShowModal(true);
     };
 
-    // 🔹 Cerrar modal sin eliminar
+    // Cerrar modal sin eliminar
     const cerrarModalEliminar = () => {
         setGastoSeleccionado(null);
         setShowModal(false);
     };
 
-    // 🔹 Eliminar gasto después de confirmar en el modal
+    // Eliminar gasto después de confirmar en el modal
     const eliminarGasto = async () => {
         if (gastoSeleccionado === null) return;
 
         try {
-            await axios.post("http://localhost:5000/gastos/eliminar", { id: gastoSeleccionado });
+            // Cambiamos axios.post por fetch
+            const response = await fetch("http://localhost:5000/gastos/eliminar", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id: gastoSeleccionado }),
+            });
+
+            // Verificar si la respuesta del servidor es correcta (2xx)
+            if (!response.ok) {
+                throw new Error("Error al eliminar gasto");
+            }
 
             alert("Gasto eliminado correctamente");
-            onDelete(gastoSeleccionado); // 🔹 Actualiza la tabla en `GastosPage.tsx`
-            cerrarModalEliminar(); // 🔹 Cierra el modal
+            onDelete(gastoSeleccionado); 
+            cerrarModalEliminar();
         } catch (error) {
             console.error("Error al eliminar gasto:", error);
             alert("No se pudo eliminar el gasto");
@@ -67,7 +79,9 @@ const ListadoGastos = ({ data, categorias, onDelete }: ListadoGastosProps) => {
                     {data.map((gasto) => (
                         <tr key={gasto.id}>
                             <td>{new Date(gasto.fecha).toLocaleDateString("es-PE")}</td>
-                            <td>{categorias.find((c) => c.id === gasto.categoriaId)?.nombre || "Desconocido"}</td>
+                            <td>
+                                {categorias.find((c) => c.id === gasto.categoriaId)?.nombre || "Desconocido"}
+                            </td>
                             <td>{gasto.descripcion}</td>
                             <td>{gasto.recurrente}</td>
                             <td>S/. {gasto.monto.toFixed(2)}</td>
@@ -85,7 +99,7 @@ const ListadoGastos = ({ data, categorias, onDelete }: ListadoGastosProps) => {
                 </tbody>
             </table>
 
-            {/* 🔹 Modal de Confirmación de Eliminación */}
+            {/* Modal de Confirmación de Eliminación */}
             <ModalBorrarGasto
                 showModal={showModal}
                 onCloseModal={cerrarModalEliminar}
