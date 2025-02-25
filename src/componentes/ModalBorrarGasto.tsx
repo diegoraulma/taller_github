@@ -8,6 +8,8 @@ const ModalBorrarGasto = ({ showModal, onCloseModal, onBorrarGasto }: BorrarGast
   if (!showModal) return null; // 🔹 No renderizar nada si el modal está cerrado
 
   return (
+    <>
+    {showModal && <div className="modal-backdrop show"></div>}
       <div className="modal fade show d-block" tabIndex={-1} aria-hidden={!showModal}>
           <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
@@ -29,6 +31,7 @@ const ModalBorrarGasto = ({ showModal, onCloseModal, onBorrarGasto }: BorrarGast
               </div>
           </div>
       </div>
+      </>
   );
 };
 

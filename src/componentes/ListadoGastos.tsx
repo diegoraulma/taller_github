@@ -4,7 +4,7 @@ import { Categoria } from "./ModalAgregarGasto";
 import ModalBorrarGasto from "./ModalBorrarGasto";
 
 export interface ListadoGastosItem {
-    id: number;
+    id?: number;
     fecha: string;
     categoriaId: number;
     descripcion: string;
@@ -89,7 +89,7 @@ const ListadoGastos = ({ data, categorias, onDelete }: ListadoGastosProps) => {
                                 <button className="btn btn-sm btn-outline-primary">✏️</button>
                                 <button
                                     className="btn btn-sm btn-outline-danger"
-                                    onClick={() => abrirModalEliminar(gasto.id)}
+                                    onClick={() => gasto.id !== undefined && abrirModalEliminar(gasto.id)}
                                 >
                                     🗑️
                                 </button>
