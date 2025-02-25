@@ -4,6 +4,8 @@ import { ListadoGastosItem } from "./ListadoGastos";
 export interface Categoria {
   id: number;
   nombre: string;
+  presupuestoTotal?: number;
+  gastoTotal?: number;
 }
 
 interface AgregarGastoProps {
@@ -49,7 +51,13 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
       recurrente: recurrente ? "Sí" : "No", // Convierte booleano en texto
       monto
     };
-  
+    const nuevoGastoTotal = (props.categorias.find((c) => c.id === nuevoGasto.categoriaId)?.gastoTotal ?? 0) + nuevoGasto.monto;
+    const actualPresupuesto = (props.categorias.find((c) => c.id === nuevoGasto.categoriaId)?.presupuestoTotal ?? 0);
+    if(actualPresupuesto<nuevoGastoTotal){
+      props.onCloseModal();
+      alert("Se pasa el presupuesto");
+      return;
+    }
     console.log("Enviando gasto al backend:", nuevoGasto);
     props.onGuardarGasto(nuevoGasto);
     props.onCloseModal();
