@@ -14,6 +14,8 @@ const ModalOrdenarGastos = ({ showModal, onCloseModal, onAplicarOrden }: Ordenar
     };
 
     return (
+        <>
+        {showModal && <div className="modal-backdrop show"></div>}
         <div className="modal fade show d-block" tabIndex={-1} aria-hidden={!showModal}>
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
@@ -41,6 +43,7 @@ const ModalOrdenarGastos = ({ showModal, onCloseModal, onAplicarOrden }: Ordenar
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

@@ -53,7 +53,7 @@ const LateralPageAdministrador: React.FC = () => {
         </li>
         <li className="nav-item">
           <Link
-            to="/configuracion"
+            to="/usuarios"
             className="nav-link text-dark d-flex align-items-center"
           >
             <FaGear className="me-2 fs-4" />

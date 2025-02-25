@@ -24,9 +24,9 @@ interface ModalesPresupuestoProps {
     httpGuardarPresupuesto: (nuevoPpto: Presupuesto) => void;
     httpEditarPresupuesto: (id: number, pptoActualizado: Presupuesto) => void;
     httpEliminarPresupuesto: (id: number) => void;
-    showAlertas: boolean; // Nuevo prop para mostrar el modal de alertas
-    closeAlertas: () => void; // Nuevo prop para cerrar el modal de alertas
-    alertas: { mensaje: string }[]; // Nuevo prop para las alertas
+    // showAlertas: boolean; // Nuevo prop para mostrar el modal de alertas
+    // closeAlertas: () => void; // Nuevo prop para cerrar el modal de alertas
+    // alertas: { mensaje: string }[]; // Nuevo prop para las alertas
 }
 
 const ModalesPresupuesto = (props: ModalesPresupuestoProps) => {
@@ -172,7 +172,7 @@ const ModalesPresupuesto = (props: ModalesPresupuestoProps) => {
             </div>
         </div>
 
-        {/* Modal de Alertas */}
+        {/* Modal de Alertas
         {props.showAlertas && <div className="modal-backdrop show"></div>}
         <div className={`modal ${props.showAlertas ? "d-block" : "d-none"}`} tabIndex={-1}>
             <div className="modal-dialog">
@@ -193,7 +193,7 @@ const ModalesPresupuesto = (props: ModalesPresupuestoProps) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
       </>
     );
 };

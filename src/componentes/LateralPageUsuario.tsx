@@ -82,7 +82,10 @@ const LateralPageUsuario = () => {
           </a>
         </li>
         <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center active" href="">
+          <a className="nav-link text-dark d-flex align-items-center active" href=""
+            onClick={()=>{
+              navigate("/Main")
+            }}>
             <FaGear className="me-2 fs-4" />
             Configuración
           </a>

@@ -29,7 +29,7 @@ const RecuperarPage = () => {
             const data = await response.json();
             if (data.msg === "Contraseña actualizada correctamente") {
                 alert("¡Contraseña cambiada exitosamente!");
-                navigate("/login");
+                navigate("/");
             } else {
                 alert(data.msg);
             }
