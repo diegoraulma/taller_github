@@ -24,7 +24,7 @@ import PresupuestosPage from './pagesUsuario/PresupuestoPage'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename = '/taller_github'>
+    <BrowserRouter basename='/taller_github'>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/Main" element={<PerfilPage />} />
