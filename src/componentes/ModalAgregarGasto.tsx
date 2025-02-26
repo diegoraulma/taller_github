@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ListadoGastosItem } from "./ListadoGastos";
+import ModalAlertaPresupuesto from "./ModalAlertaPresupuesto";
 
 export interface Categoria {
   id: number;
@@ -21,6 +22,16 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
   const [descripcion, setDescripcion] = useState<string>("");
   const [recurrente, setRecurrente] = useState<boolean>(false);
   const [monto, setMonto] = useState<number>(0);
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  
+  const abrirModalAlerta = () => {
+    setShowModal(true);
+  };
+
+  const cerrarModalAlerta = () => {
+      setShowModal(false);
+  };
 
   const fechaChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFecha(e.target.value);
@@ -55,7 +66,7 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
     const actualPresupuesto = (props.categorias.find((c) => c.id === nuevoGasto.categoriaId)?.presupuestoTotal ?? 0);
     if(actualPresupuesto<nuevoGastoTotal){
       props.onCloseModal();
-      alert("Se pasa el presupuesto");
+      abrirModalAlerta();
       return;
     }
     console.log("Enviando gasto al backend:", nuevoGasto);
@@ -126,6 +137,11 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
           </div>
         </div>
       </div>
+
+      <ModalAlertaPresupuesto
+        showModal = {showModal}
+        onCloseModal={cerrarModalAlerta}
+        />
     </>
   );
 };
