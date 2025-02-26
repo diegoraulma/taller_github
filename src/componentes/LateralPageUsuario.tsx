@@ -60,13 +60,13 @@ const LateralPageUsuario = () => {
       {/* Menú de navegación */}
       <ul className="nav flex-column w-100 mt-4">
         <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center" href="">
+          <a className="nav-link text-dark d-flex align-items-center">
             <VscGraph className="me-2 fs-4" />
             Dashboard
           </a>
         </li>
         <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center" href=""
+          <a className="nav-link text-dark d-flex align-items-center"
             onClick = {()=>{
               navigate("/gastos")
             }}>
@@ -75,7 +75,7 @@ const LateralPageUsuario = () => {
           </a>
         </li>
         <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center" href=""
+          <a className="nav-link text-dark d-flex align-items-center" 
             onClick = {()=>{
               navigate("/presupuestosusu")
             }}>
@@ -84,7 +84,7 @@ const LateralPageUsuario = () => {
           </a>
         </li>
         <li className="nav-item opcioneslateral">
-          <a className="nav-link text-dark d-flex align-items-center active" href=""
+          <a className="nav-link text-dark d-flex align-items-center active"
             onClick={()=>{
               navigate("/Main")
             }}>
@@ -93,7 +93,7 @@ const LateralPageUsuario = () => {
           </a>
         </li>
         <li className="nav-item opcioneslateral">
-          <a className="nav-link text-danger d-flex align-items-center" href=""
+          <a className="nav-link text-danger d-flex align-items-center"
             onClick={() => {
               sessionStorage.removeItem("usuario");  // ❌ Elimina el usuario del almacenamiento
               navigate("/"); // 🔄 Redirige al login
