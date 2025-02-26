@@ -1,16 +1,32 @@
 import { useState, useEffect } from "react";
 
-const ModalesPerfil = ({ usuario, setUsuario }) => {
-    const [nuevoNombre, setNuevoNombre] = useState(usuario.nombre);
-    const [nuevoUsuario, setNuevoUsuario] = useState(usuario.usuario);
+interface Usuario {
+    id: number | null;
+    nombre: string;
+    usuario: string;
+    password: string;
+}
+
+interface ModalesPerfilProps {
+    usuario: Usuario;
+    setUsuario: (usuario: Usuario) => void;
+}
+
+// { usuario, setUsuario }
+
+const ModalesPerfil = (props: ModalesPerfilProps) => {
+    const [nuevoNombre, setNuevoNombre] = useState(props.usuario.nombre);
+    const [nuevoUsuario, setNuevoUsuario] = useState(props.usuario.usuario);
     const [nuevaPassword, setNuevaPassword] = useState("");
     const [mensaje, setMensaje] = useState("");
 
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
     useEffect(() => {
-        setNuevoNombre(usuario.nombre);
-        setNuevoUsuario(usuario.usuario);
+        setNuevoNombre(props.usuario.nombre);
+        setNuevoUsuario(props.usuario.usuario);
         setNuevaPassword(""); 
-    }, [usuario]);
+    }, [props.usuario]);
 
     const handleGuardarPassword = async () => {
         if (!nuevaPassword) {
@@ -19,11 +35,11 @@ const ModalesPerfil = ({ usuario, setUsuario }) => {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/password/cambiar-password", {
+            const response = await fetch(URL_BACKEND + "/password/cambiar-password", {
                 method: "PUT", 
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    usuario: usuario.usuario, 
+                    usuario: props.usuario.usuario, 
                     nuevaPassword: nuevaPassword,
                     confirmarPassword: nuevaPassword, 
                 }),

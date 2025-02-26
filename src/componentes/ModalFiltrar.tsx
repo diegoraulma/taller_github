@@ -26,6 +26,8 @@ const ModalFiltrarGastos = ({
     const [tipoFiltro, setTipoFiltro] = useState("fecha");
     const [categorias, setCategorias] = useState<{ id: number; nombre: string }[]>([]);
 
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
     useEffect(() => {
         if (tipoFiltro === "recurrente") {
             setValorFiltro(filtroRecurrente);
@@ -40,7 +42,7 @@ const ModalFiltrarGastos = ({
 
     useEffect(() => {
         if (tipoFiltro === "categoria") {
-            axios.get("http://localhost:5000/categorias")
+            axios.get(URL_BACKEND + "/categorias")
                 .then(response => {
                     setCategorias(response.data.categorias);
                 })

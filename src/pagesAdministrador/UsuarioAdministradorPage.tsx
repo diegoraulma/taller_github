@@ -14,6 +14,8 @@ type User = {
 
 const UsuarioAdministradorPage: React.FC = () => {
 
+  const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
   const storedUsuario = JSON.parse(sessionStorage.getItem("usuario") || "{}")
 
   const [users, setUsers] = useState<User[]>([])
@@ -25,7 +27,7 @@ const UsuarioAdministradorPage: React.FC = () => {
   const [filterRole, setFilterRole] = useState("");
 
   const httpCrearRegistroHistorial = async (usuarioId:number, accion:string) => {
-    const url = "http://localhost:5000/historial/";
+    const url = URL_BACKEND + "/historial/";
     try {
       const resp = await fetch(url,{
         method: "POST",
@@ -46,7 +48,7 @@ const UsuarioAdministradorPage: React.FC = () => {
   }
 
   const httpObtenerUsuarios = async () => {
-    const url = "http://localhost:5000/usuarios/";
+    const url = URL_BACKEND + "/usuarios/";
         try {
             const resp = await fetch(url);
             const data = await resp.json();
@@ -61,7 +63,7 @@ const UsuarioAdministradorPage: React.FC = () => {
   }
 
   const httpGuardarUsuario = async (nuevoUsuario: User) => {
-      const url = "http://localhost:5000/usuarios/"; // Asegurar que esta URL es correcta
+      const url = URL_BACKEND + "/usuarios/"; // Asegurar que esta URL es correcta
       try {
           console.log("Intentando guardar usuario:", nuevoUsuario);
           const resp = await fetch(url, {
@@ -92,7 +94,7 @@ const UsuarioAdministradorPage: React.FC = () => {
   };
 
   const httpEditarUsuario = async(id:number, usuarioActualizado:User) =>{
-    const url = `http://localhost:5000/usuarios/${id}`;
+    const url = URL_BACKEND + `/usuarios/${id}`;
     try{
       console.log("Intentando actualizar usuario:", usuarioActualizado);
 
@@ -125,7 +127,7 @@ const UsuarioAdministradorPage: React.FC = () => {
   }
 
   const httpEliminarUsuario = async(id:number) =>{
-    const url = `http://localhost:5000/usuarios/${id}`;
+    const url = URL_BACKEND + `/usuarios/${id}`;
     try{
       console.log("Intentando eliminar usuario con ID:", id);
 

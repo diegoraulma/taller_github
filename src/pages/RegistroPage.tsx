@@ -8,8 +8,10 @@ const RegistroPage = () => {
 
     const isValidEmail = (email: string): boolean => /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email);
 
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
     const httpRegistrarUsuario = async (nombreUsuario : string, passwordUsuario : string, correoUsuario : string) => {
-        const url = "http://localhost:5000/usuarios/register";
+        const url = URL_BACKEND + "/usuarios/register";
         const resp = await fetch(url, {
             method : "POST",
             headers: {

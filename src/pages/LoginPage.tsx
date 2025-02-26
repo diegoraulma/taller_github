@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
     const navigate = useNavigate()
 
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
     const loginHandler = async (usuario: string, password: string) => {
-        const url = "http://localhost:5000/usuarios/login";
+        const url = URL_BACKEND + "/usuarios/login";
         try {
             const resp = await fetch(url, {
                 method: "POST",

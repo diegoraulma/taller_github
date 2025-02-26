@@ -16,7 +16,7 @@ import UsuarioAdministradorPage from './pagesAdministrador/UsuarioAdministradorP
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import DashboardAdministradorPage from './pagesAdministrador/DashboardAdministradorPage'
+// import DashboardAdministradorPage from './pagesAdministrador/DashboardAdministradorPage'
 import PresupuestosPage from './pagesUsuario/PresupuestoPage'
 
 
@@ -24,7 +24,7 @@ import PresupuestosPage from './pagesUsuario/PresupuestoPage'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename = '/taller_github'>
+    <BrowserRouter basename = '/'>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/Main" element={<PerfilPage />} />
@@ -37,8 +37,8 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/presupuestosusu" element={<PresupuestosPage/>} />
         {/* RUTAS DE ADMINISTRADOR */}
         <Route path="/usuarios" element={<UsuarioAdministradorPage />} />
-        <Route path="/dashboard" element={<DashboardAdministradorPage />} />
-        <Route path="/historial" element={<HistorialAdministradorPage data={[]}/>} />
+        {/* <Route path="/dashboard" element={<DashboardAdministradorPage />} /> */}
+        <Route path="/historial" element={<HistorialAdministradorPage />} />
 
       </Routes>
     </BrowserRouter>

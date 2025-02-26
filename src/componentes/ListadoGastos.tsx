@@ -22,6 +22,8 @@ const ListadoGastos = ({ data, categorias, onDelete }: ListadoGastosProps) => {
     const [gastoSeleccionado, setGastoSeleccionado] = useState<number | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
 
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
     // Abrir modal y guardar el gasto a eliminar
     const abrirModalEliminar = (id: number) => {
         setGastoSeleccionado(id);
@@ -40,7 +42,7 @@ const ListadoGastos = ({ data, categorias, onDelete }: ListadoGastosProps) => {
 
         try {
             // Cambiamos axios.post por fetch
-            const response = await fetch("http://localhost:5000/gastos/eliminar", {
+            const response = await fetch(URL_BACKEND + "/gastos/eliminar", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import '../pages/styleperfil.css'; // Importamos nuestro styleperfil.css
 import LateralPageAdministrador from "../componentes/LateralPageAdministrador"; // Aquí está el menú lateral
-import { FaTrash, FaPlus, FaEdit } from "react-icons/fa";
 
 interface Usuario {
   nombre: string;
@@ -17,13 +16,9 @@ interface ListadoHistorialItem {
   Usuario : Usuario;
 }
 
-interface ListadoHistorialProps {
-  data : ListadoHistorialItem[]
-}
 
 
-
-const HistorialAdministradorPage = (props : ListadoHistorialProps) => {
+const HistorialAdministradorPage = () => {
   // const data : ListadoHistorialItem[] = [
   //   { id: "001", nombre: "Jessica", correo: "jess@taxes.com", fecha: "12/12/2024", hora: "17:50", accion: "Borrar" },
   //   { id: "002", nombre: "Jhon", correo: "jon@taxes.com", fecha:  "17/12/2024", hora: "19:50", accion: "Agregar" },
@@ -32,10 +27,12 @@ const HistorialAdministradorPage = (props : ListadoHistorialProps) => {
   //   { id: "005", nombre: "Luis", correo: "luis@taxes.com", fecha: "07/12/2024", hora: "12:50", accion: "Borrar" },
   // ];
 
-  const [historial, setHistorial] = useState<ListadoHistorialItem[]>([])
+  const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
 
+  const [historial, setHistorial] = useState<ListadoHistorialItem[]>([])
+  
   const httpObtenerHistorial = async () => {
-    const url = "http://localhost:5000/historial/";
+    const url = URL_BACKEND + "/historial/";
         try {
             const resp = await fetch(url);
             const data = await resp.json();

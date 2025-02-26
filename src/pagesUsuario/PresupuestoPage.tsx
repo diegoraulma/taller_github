@@ -23,8 +23,10 @@ const PresupuestosPage = ()=>{
     const [showModalEditar,setShowModalEditar] = useState<boolean>(false)
     const [showModalEliminar,setShowModalEliminar] = useState<boolean>(false)
 
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
     const httpObtenerPresupuestos = async () => {
-        const url = "http://localhost:5000/presupuesto/";
+        const url = URL_BACKEND + "/presupuesto/";
             try {
                 const resp = await fetch(url);
                 const data = await resp.json();
@@ -39,7 +41,7 @@ const PresupuestosPage = ()=>{
     }
 
     const httpGuardarPresupuesto = async (nuevoPpto: Presupuesto) => {
-        const url = "http://localhost:5000/presupuesto/";
+        const url = URL_BACKEND + "/presupuesto/";
         try {
             console.log("Intentando guardar presupuesto:", nuevoPpto);
             const resp = await fetch(url, {
@@ -70,7 +72,7 @@ const PresupuestosPage = ()=>{
     };
 
     const httpEditarPresupuesto = async(id:number, pptoActualizado:Presupuesto) =>{
-        const url = `http://localhost:5000/presupuesto/${id}`;
+        const url = URL_BACKEND + `/presupuesto/${id}`;
         try{
           console.log("Intentando actualizar presupuesto:", pptoActualizado);
     
@@ -103,7 +105,7 @@ const PresupuestosPage = ()=>{
     }
 
     const httpEliminarPresupuesto = async(id:number) =>{
-        const url = `http://localhost:5000/presupuesto/${id}`;
+        const url = URL_BACKEND + `/presupuesto/${id}`;
         try{
           console.log("Intentando eliminar presupuesto con ID:", id);
     

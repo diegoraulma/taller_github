@@ -8,6 +8,8 @@ const RecuperarPage = () => {
     const [nuevaPassword, setNuevaPassword] = useState('');
     const [confirmarPassword, setConfirmarPassword] = useState('');
 
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
     const handlePasswordChange = async () => {
         if (!usuario || !nuevaPassword || !confirmarPassword) {
             alert("Todos los campos son obligatorios");
@@ -20,7 +22,7 @@ const RecuperarPage = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/password/cambiar-password", {
+            const response = await fetch(URL_BACKEND + "/password/cambiar-password", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ usuario, nuevaPassword, confirmarPassword }),

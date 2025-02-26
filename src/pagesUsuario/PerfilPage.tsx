@@ -3,13 +3,23 @@ import LateralPageUsuario from "../componentes/LateralPageUsuario"; // Aquí est
 import ModalesPerfil from '../componentes/ModalesPerfil';
 import { useEffect, useState } from "react";
 
+interface Usuario {
+    id: number | null;
+    nombre: string;
+    usuario: string;
+    password: string;
+}
+
+
 const PerfilPage = () => {
-    const [usuario, setUsuario] = useState({
+    const [usuario, setUsuario] = useState<Usuario>({
         id: null,  // Agregamos el ID
         nombre: "Cargando...",
         usuario: "Cargando...",
         password: "*****"
     });
+
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
     
     const obtenerUsuario = async () => {
         const userData = sessionStorage.getItem("usuario");
@@ -29,7 +39,7 @@ const PerfilPage = () => {
         const userId = usuarioSesion.id;
     
         try {
-            const resp = await fetch(`http://localhost:5000/usuarios/${userId}`);
+            const resp = await fetch(URL_BACKEND + `/usuarios/${userId}`);
             const data = await resp.json();
     
             if (data.id) {

@@ -24,10 +24,10 @@ const GastosPage = () => {
     const [filtroFecha, setFiltroFecha] = useState<string>("");
     const [filtroCategoria, setFiltroCategoria] = useState<string>("");
 
-
+    const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
     
     const httpObtenerGastos = async () => {
-        const url = "http://localhost:5000/gastos/";
+        const url = URL_BACKEND + "/gastos/";
         try {
             const resp = await fetch(url);
             const data = await resp.json();
@@ -71,7 +71,7 @@ const GastosPage = () => {
 
     const obtenerGastos = async (orden = "fecha") => {
         try {
-            const resp = await axios.get(`http://localhost:5000/gastos?orden=${orden}`);
+            const resp = await axios.get(URL_BACKEND + `/gastos?orden=${orden}`);
             setGastos(resp.data.gastos);
         } catch (error) {
             console.error("Error al obtener gastos:", error);
@@ -79,7 +79,7 @@ const GastosPage = () => {
     };
 
     const httpObtenerCategorias = async () => {
-        const url = "http://localhost:5000/categorias";
+        const url = URL_BACKEND + "/categorias";
         try {
             const resp = await fetch(url);
             const data = await resp.json();
@@ -94,7 +94,7 @@ const GastosPage = () => {
     };
 
     const httpGuardarGasto = async (nuevoGasto: ListadoGastosItem) => {
-        const url = "http://localhost:5000/gastos";
+        const url = URL_BACKEND + "/gastos";
         try {
             const resp = await fetch(url, {
                 method: "POST",
@@ -120,7 +120,7 @@ const GastosPage = () => {
         if (gastoSeleccionado === null) return;
 
         try {
-            await axios.post("http://localhost:5000/gastos/eliminar", { id: gastoSeleccionado });
+            await axios.post(URL_BACKEND + "/gastos/eliminar", { id: gastoSeleccionado });
 
             alert("Gasto eliminado correctamente");
             setGastos((prevGastos) => prevGastos.filter((gasto) => gasto.id !== gastoSeleccionado));

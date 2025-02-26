@@ -15,11 +15,13 @@ const LateralPageUsuario = () => {
     nombre: "Cargando...",
   });
 
+  const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+
   const obtenerUsuario = async () => {
     const userData = JSON.parse(sessionStorage.getItem("usuario") || "{}");
     const userId = userData.id || 1; // Obtiene el ID del usuario logueado
 
-    const resp = await fetch(`http://localhost:5000/usuarios/${userId}`, {
+    const resp = await fetch(URL_BACKEND + `/usuarios/${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
