@@ -121,15 +121,13 @@ const GastosPage = () => {
 
         try {
             await axios.post(URL_BACKEND + "/gastos/eliminar", { id: gastoSeleccionado });
-
-            alert("Gasto eliminado correctamente");
+            
             setGastos((prevGastos) => prevGastos.filter((gasto) => gasto.id !== gastoSeleccionado));
             closeModalBorrar();
             httpObtenerGastos();
             httpObtenerCategorias();
         } catch (error) {
             console.error("Error al eliminar gasto:", error);
-            alert("No se pudo eliminar el gasto");
         }
     };
 

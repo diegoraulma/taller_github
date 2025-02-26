@@ -43,7 +43,6 @@ const UsuarioAdministradorPage: React.FC = () => {
       }
     } catch(error){
       console.error("Error de registro a historial:", error);
-      alert("Error al conectar con el servidor.");
     }
   }
 
