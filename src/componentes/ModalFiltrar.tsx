@@ -6,18 +6,45 @@ interface FiltrarGastosProps {
     showModal: boolean;
     onCloseModal: () => void;
     onAplicarFiltro: (filtro: { tipo: string; valor: string }) => void;
+    filtroRecurrente: string;
+    filtroMonto: string;
+    filtroFecha: string;
+    filtroCategoria: string;
 }
 
-const ModalFiltrarGastos = ({ showModal, onCloseModal, onAplicarFiltro }: FiltrarGastosProps) => {
-    const [valorFiltro, setValorFiltro] = useState("");
+
+const ModalFiltrarGastos = ({ 
+    showModal, 
+    onCloseModal, 
+    onAplicarFiltro, 
+    filtroRecurrente, 
+    filtroMonto, 
+    filtroFecha, 
+    filtroCategoria 
+}: FiltrarGastosProps) => {
+    const [valorFiltro, setValorFiltro] = useState(filtroFecha);
     const [tipoFiltro, setTipoFiltro] = useState("fecha");
     const [categorias, setCategorias] = useState<{ id: number; nombre: string }[]>([]);
 
     useEffect(() => {
+        if (tipoFiltro === "recurrente") {
+            setValorFiltro(filtroRecurrente);
+        } else if (tipoFiltro === "monto") {
+            setValorFiltro(filtroMonto);
+        } else if (tipoFiltro === "fecha") {
+            setValorFiltro(filtroFecha);
+        } else if (tipoFiltro === "categoria") {
+            setValorFiltro(filtroCategoria);
+        }
+    }, [tipoFiltro, filtroRecurrente, filtroMonto, filtroFecha, filtroCategoria]);
+
+    useEffect(() => {
         if (tipoFiltro === "categoria") {
-            axios.get("http://localhost:5000/categorias").then(response => {
-                setCategorias(response.data.categorias);
-            }).catch(error => console.error("Error al obtener categorías:", error));
+            axios.get("http://localhost:5000/categorias")
+                .then(response => {
+                    setCategorias(response.data.categorias);
+                })
+                .catch(error => console.error("Error al obtener categorías:", error));
         }
     }, [tipoFiltro]);
 
@@ -29,7 +56,6 @@ const ModalFiltrarGastos = ({ showModal, onCloseModal, onAplicarFiltro }: Filtra
             return;
         }
     
-        console.log("Aplicando filtro:", { tipo: tipoFiltro, valor: valorFiltro });
         onAplicarFiltro({ tipo: tipoFiltro, valor: valorFiltro });
         onCloseModal();
     };
@@ -49,11 +75,15 @@ const ModalFiltrarGastos = ({ showModal, onCloseModal, onAplicarFiltro }: Filtra
                         <div className="mb-3">
                             <label className="form-label">Filtrar por:</label>
                             <select className="form-select" value={tipoFiltro} onChange={(e) => setTipoFiltro(e.target.value)}>
+                                <option value="sin filtro">Sin filtro</option> 
                                 <option value="fecha">Fecha</option>
                                 <option value="categoria">Categoría</option>
                                 <option value="monto">Monto</option>
+                                <option value="recurrente">Recurrente</option>
                             </select>
+
                         </div>
+
                         <div className="mb-3">
                             <label className="form-label">Valor:</label>
                             {tipoFiltro === "fecha" ? (
@@ -64,6 +94,12 @@ const ModalFiltrarGastos = ({ showModal, onCloseModal, onAplicarFiltro }: Filtra
                                     {categorias.map(cat => (
                                         <option key={cat.id} value={cat.id}>{cat.nombre}</option>
                                     ))}
+                                </select>
+                            ) : tipoFiltro === "recurrente" ? (
+                                <select className="form-select" value={valorFiltro} onChange={(e) => setValorFiltro(e.target.value)}>
+                                    <option value="">Seleccione</option>
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
                                 </select>
                             ) : (
                                 <input type="number" className="form-control" value={valorFiltro} onChange={(e) => setValorFiltro(e.target.value)} />

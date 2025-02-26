@@ -3,13 +3,13 @@ import autoTable from "jspdf-autotable";
 import "../pages/styleperfil.css"; // Importamos nuestro styleperfil.css
 import LateralPageUsuario from "../componentes/LateralPageUsuario"; // Menú lateral
 import ListadoGastos, { ListadoGastosItem } from "../componentes/ListadoGastos";
-import ModalFiltrarGastos from "../componentes/ModalFiltrar";
 import ModalOrdenarGastos from "../componentes/ModalOrdenarGastos";
 import ModalModificar from "../componentes/ModalModificar";
 import { useEffect, useState } from "react";
 import ModalAgregarGasto, { Categoria } from "../componentes/ModalAgregarGasto";
 import ModalBorrarGasto from "../componentes/ModalBorrarGasto";
 import axios from "axios"; // 🔹 Importamos axios
+import ModalFiltrarGastos from "../componentes/ModalFiltrar";
 
 const GastosPage = () => {
     const [gastos, setGastos] = useState<ListadoGastosItem[]>([]);
@@ -19,7 +19,13 @@ const GastosPage = () => {
     const [gastoSeleccionado, setGastoSeleccionado] = useState<number | null>(null); // 🔹 Guardar el ID del gasto a eliminar
     const [showModalOrdenar, setShowModalOrdenar] = useState<boolean>(false);
     const [showModalFiltrar, setShowModalFiltrar] = useState<boolean>(false);
+    const [filtroRecurrente, setFiltroRecurrente] = useState<string>("todos");
+    const [filtroMonto, setFiltroMonto] = useState<string>("");
+    const [filtroFecha, setFiltroFecha] = useState<string>("");
+    const [filtroCategoria, setFiltroCategoria] = useState<string>("");
 
+
+    
     const httpObtenerGastos = async () => {
         const url = "http://localhost:5000/gastos/";
         try {
@@ -35,39 +41,37 @@ const GastosPage = () => {
         }
     };
 
-    useEffect(() => {
-        obtenerGastos();
-    }, []);
+    const gastosFiltradosF = gastos.filter((gasto) => {
+        if (filtroRecurrente !== "todos" && gasto.recurrente !== filtroRecurrente) {
+            return false;
+        }
+        if (filtroMonto && gasto.monto !== Number(filtroMonto)) {
+            return false;
+        }
+        if (filtroFecha && gasto.fecha !== filtroFecha) {  // Comparación exacta de fecha
+            return false;
+        }
+        if (filtroCategoria && gasto.categoriaId !== Number(filtroCategoria)) {  // Convertimos categoría a número
+            return false;
+        }
+        return true;
+    });
+    
+    
 
     useEffect(() => {
-        obtenerGastosFiltro({ tipo: "fecha", valor: "2024-05-19" }); // Valor de prueba
+        const gastosGuardados = JSON.parse(localStorage.getItem("gastos") || "[]");
+        setGastos(gastosGuardados);
+    }, []); 
+    
+    useEffect(() => {
+        obtenerGastos();
     }, []);
     
 
     const obtenerGastos = async (orden = "fecha") => {
         try {
             const resp = await axios.get(`http://localhost:5000/gastos?orden=${orden}`);
-            setGastos(resp.data.gastos);
-        } catch (error) {
-            console.error("Error al obtener gastos:", error);
-        }
-    };
-
-    const obtenerGastosFiltro = async ({ tipo, valor }: { tipo: string; valor: string }) => {
-        if (!tipo) {
-            console.error("Error: Falta el tipo de filtro.");
-            return;
-        }
-    
-        const url = valor
-            ? `http://localhost:5000/gastos?filtro=${tipo}&valor=${valor}`
-            : `http://localhost:5000/gastos?filtro=${tipo}`;
-    
-        console.log(`Consultando API con filtro: Tipo=${tipo}, Valor=${valor || "Todos"}`);
-    
-        try {
-            const resp = await axios.get(url);
-            console.log("Respuesta del servidor:", resp.data);
             setGastos(resp.data.gastos);
         } catch (error) {
             console.error("Error al obtener gastos:", error);
@@ -147,6 +151,7 @@ const GastosPage = () => {
         setShowModalBorrar(false);
     };
 
+
     const exportarCSV = () => {
         let csv = "Fecha,Categoría,Descripción,Recurrente,Monto\n";
         gastos.forEach((gasto) => {
@@ -176,6 +181,26 @@ const GastosPage = () => {
         doc.save("gastos.pdf");
     };
 
+    const handleAplicarFiltro = (filtro: { tipo: string; valor: string }) => {
+        if (filtro.tipo === "sin filtro") {
+            setFiltroRecurrente("todos");
+            setFiltroMonto("");
+            setFiltroFecha("");
+            setFiltroCategoria("");
+        } else if (filtro.tipo === "recurrente") {
+            setFiltroRecurrente(filtro.valor);
+        } else if (filtro.tipo === "monto") {
+            setFiltroMonto(filtro.valor);
+        } else if (filtro.tipo === "fecha") {
+            setFiltroFecha(filtro.valor);
+        } else if (filtro.tipo === "categoria") {
+            setFiltroCategoria(filtro.valor);
+        }
+    };
+    
+    
+    
+
     return (
         <div className="body">
             {/* Menú lateral */}
@@ -186,11 +211,11 @@ const GastosPage = () => {
                 <header className="d-flex justify-content-between align-items-center mb-4">
                     <h1 className="fs-4">Mis gastos</h1>
                     <div className="d-flex gap-2">
+                        <button className="btn btn-primary" onClick={() => setShowModalFiltrar(true)}>
+                            Filtrar
+                        </button>
                     <button className="btn btn-primary" onClick={() => setShowModalOrdenar(true)}>
                     Ordenar
-                    </button>
-                    <button className="btn btn-primary" onClick={() => setShowModalFiltrar(true)}>
-                    Filtrar
                     </button>
                         <div className="btn-group">
                             <button className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
@@ -214,9 +239,8 @@ const GastosPage = () => {
                         </button>
                     </div>
                 </header>
-
                 {/* Tabla de gastos */}
-                <ListadoGastos data={gastos} categorias={categorias} onDelete={openModalBorrar} />
+                <ListadoGastos data={gastosFiltradosF} categorias={categorias} onDelete={openModalBorrar} />
             </div>
 
             <ModalAgregarGasto
@@ -230,11 +254,6 @@ const GastosPage = () => {
                 categorias={categorias}
             />
 
-            <ModalFiltrarGastos
-                showModal={showModalFiltrar}
-                onCloseModal={() => setShowModalFiltrar(false)}
-                onAplicarFiltro={obtenerGastosFiltro}
-            />
 
             <ModalOrdenarGastos
                 showModal={showModalOrdenar}
@@ -247,6 +266,16 @@ const GastosPage = () => {
                 onCloseModal={closeModalBorrar}
                 onBorrarGasto={httpEliminarGasto}
             />
+
+<ModalFiltrarGastos
+    showModal={showModalFiltrar}
+    onCloseModal={() => setShowModalFiltrar(false)}
+    onAplicarFiltro={handleAplicarFiltro}
+    filtroRecurrente={filtroRecurrente}
+    filtroMonto={filtroMonto}
+    filtroFecha={filtroFecha}  // 🔹 Nuevo
+    filtroCategoria={filtroCategoria}  // 🔹 Nuevo
+/>
 
             <ModalModificar />
 
