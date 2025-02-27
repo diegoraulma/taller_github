@@ -12,12 +12,10 @@ const RecuperarPage = () => {
 
     const handlePasswordChange = async () => {
         if (!usuario || !nuevaPassword || !confirmarPassword) {
-            alert("Todos los campos son obligatorios");
             return;
         }
 
         if (nuevaPassword !== confirmarPassword) {
-            alert("Las contraseñas no coinciden");
             return;
         }
 
@@ -30,14 +28,11 @@ const RecuperarPage = () => {
 
             const data = await response.json();
             if (data.msg === "Contraseña actualizada correctamente") {
-                alert("¡Contraseña cambiada exitosamente!");
                 navigate("/");
             } else {
-                alert(data.msg);
             }
         } catch (error) {
             console.error("Error al cambiar la contraseña:", error);
-            alert("Error en el servidor. Inténtalo de nuevo.");
         }
     };
 

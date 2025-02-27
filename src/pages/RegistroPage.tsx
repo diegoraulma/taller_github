@@ -28,7 +28,6 @@ const RegistroPage = () => {
         console.log("Respuesta del backend al registro:", data); //verificamos la respuesta
 
         if (data.msg === "") {
-            alert("Registro exitoso");
 
             sessionStorage.setItem("usuario", JSON.stringify({
                 id: data.id, 
@@ -38,17 +37,14 @@ const RegistroPage = () => {
             console.log("Usuario guardado en sessionStorage:", sessionStorage.getItem("usuario"));
             navigate("/ConfirmarCorreo"); 
         } else {
-            alert(data.msg); //mostramos error en caso haya
         }
     }
     
     const handlerRegistro = (usuario: string, correo: string, password: string) => {
         if (!usuario || !password || !correo) {
             // Validación de campos vacíos
-            alert("Campos vacíos");
         } else if (!isValidEmail(correo)) {
             // Validación de correo electrónico
-            alert("Correo electrónico no válido");
         }else {
            // Redirige a la página de confirmación
            httpRegistrarUsuario(usuario, password, correo); 
