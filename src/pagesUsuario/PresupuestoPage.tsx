@@ -23,10 +23,18 @@ const PresupuestosPage = ()=>{
     const [showModalEditar,setShowModalEditar] = useState<boolean>(false)
     const [showModalEliminar,setShowModalEliminar] = useState<boolean>(false)
 
+    const storedUsuario = JSON.parse(sessionStorage.getItem("usuario") || "{}")
+    const usuarioId = storedUsuario?.id ?? null;
+
     const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
 
     const httpObtenerPresupuestos = async () => {
-        const url = URL_BACKEND + "/presupuesto/";
+        if (!usuarioId) {
+            console.warn("No hay usuario logueado.");
+            return;
+        }
+
+        const url = URL_BACKEND + `/presupuesto/usuario/${usuarioId}`;
             try {
                 const resp = await fetch(url);
                 const data = await resp.json();
