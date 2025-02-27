@@ -1,84 +1,110 @@
-// import { useEffect, useState } from "react";
-// import '../pages/styleperfil.css';
-// import LateralPageAdministrador from "../componentes/LateralPageAdministrador";
-// import {
-//   Chart as ChartJS,
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend,
-// } from "chart.js";
+import { useEffect, useState } from "react";
+import '../pages/styleperfil.css';
+import LateralPageAdministrador from "../componentes/LateralPageAdministrador";
 
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
-// const DashboardAdministradorPage = () => {
-//   const [stats, setStats] = useState({
-//     totalUsuarios: 0,
-//     monthlyData: Array(12).fill(0)
-//   });
-//   const [loading, setLoading] = useState(true);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-//   const monthLabels = [
-//     "Ene", "Feb", "Mar", "Abr", "May", "Jun", 
-//     "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-//   ];
+const DashboardAdministradorPage = () => {
+  const totalUsuarios = 12; // Total de usuarios registrados
 
-//   const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
+  const dataUsuariosMes = {
+    labels: [
+      "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+    ],
+    datasets: [
+      {
+        label: "Usuarios nuevos por mes",
+        data: [200, 150, 300, 500, 250, 400, 600, 700, 850, 1000, 750, 500],
+        backgroundColor: "#007bff",
+        borderRadius: 5,
+      },
+    ],
+  };
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         // Usando Fetch API
-//         const response = await fetch(URL_BACKEND + "/dashboard/users-stats");
-        
-//         if (!response.ok) {
-//           throw new Error(`Error HTTP: ${response.status}`);
-//         }
-        
-//         const data = await response.json();
-        
-//         const monthlyCounts = Array(12).fill(0);
-//         data.monthlySignups.forEach(item => {
-//           const month = new Date(item.month).getMonth();
-//           monthlyCounts[month] = parseInt(item.count);
-//         });
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Usuarios nuevos por mes",
+      },
+    },
+  };
 
-//         setStats({
-//           totalUsuarios: data.totalUsers,
-//           monthlyData: monthlyCounts
-//         });
+  return (
+    <div className="body">
+      {/* Menú Lateral */}
+      <div id="cajamenu">
+        <img
+          src="https://via.placeholder.com/100"
+          alt="Profile Picture"
+          className="profile-img"
+        />
+        <h2>Jessica Straus</h2>
+        <div id="menu">
+          <a href="#" className="activo">
+            Dashboard
+          </a>
+          <a href="#">
+            Usuarios
+          </a>
+          <a href="#">
+            Historial
+          </a>
+          <a href="#">
+            Configuración
+          </a>
+          <a href="#">
+            Salir
+          </a>
+        </div>
+      </div>
 
-//       } catch (error) {
-//         console.error("Error obteniendo datos:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
+      {/* Contenido Principal */}
+      <div id="contenido">
+        <header className="d-flex justify-content-between align-items-center mb-4">
+          <h1 className="fs-4">Dashboards</h1>
+        </header>
 
-//     fetchData();
-//   }, []);
+        {/* Tarjeta de Usuarios Totales */}
+        <div className="card mb-4">
+          <div className="card-body">
+            <h5 className="card-title">Usuarios Totales</h5>
+            <p className="card-text fs-2 text-center">{totalUsuarios}</p>
+          </div>
+        </div>
 
-//   // Resto del componente se mantiene igual...
-//   // (Mismo código de dataUsuariosMes, options y return)
-  
-//   return (
-//     <div className="body">
-//       <LateralPageAdministrador/>
+        {/* Gráfico de Usuarios Nuevos */}
+        <div className="card">
+          <div className="card-body">
+            <Bar data={dataUsuariosMes} options={options} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-//       <div id="contenido">
-//         {/* Mismo JSX del componente */}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DashboardAdministradorPage;
+export default DashboardAdministradorPage;
