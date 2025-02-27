@@ -10,6 +10,7 @@ interface Presupuesto {
     id?: number;
     categoriaId: number;
     monto: number;
+    usuarioId?: number;
     Categoria?: Categoria;
 };
 
@@ -34,6 +35,9 @@ const ModalesPresupuesto = (props: ModalesPresupuestoProps) => {
     const [categoriaId, setCategoriaId] = useState<number>(1);
     const [monto, setMonto] = useState<number>(0);
 
+    const storedUsuario = JSON.parse(sessionStorage.getItem("usuario") || "{}")
+    const usuarioId = storedUsuario?.id ?? null;
+
     const handleCategoriaIdChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCategoriaId(parseInt(e.target.value))
     };
@@ -50,7 +54,7 @@ const ModalesPresupuesto = (props: ModalesPresupuestoProps) => {
     // ✅ Función para manejar el Guardado de Presupuesto
     const handleGuardarPresupuesto = (e: React.FormEvent) => {
         e.preventDefault(); // ✅ Evita el refresco de la página
-        const nuevoPresupuesto: Presupuesto = { categoriaId, monto };
+        const nuevoPresupuesto: Presupuesto = { categoriaId, monto , usuarioId: usuarioId};
         props.httpGuardarPresupuesto(nuevoPresupuesto);
         props.closeModalAgregar();
     };

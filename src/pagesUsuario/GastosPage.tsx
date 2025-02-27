@@ -25,9 +25,18 @@ const GastosPage = () => {
     const [filtroCategoria, setFiltroCategoria] = useState<string>("");
 
     const URL_BACKEND = import.meta.env.VITE_URL_BACKEND || "http://localhost:5000"
-    
+
+    const storedUsuario = JSON.parse(sessionStorage.getItem("usuario") || "{}");
+    const usuarioId = storedUsuario?.id ?? null;
+
+
     const httpObtenerGastos = async () => {
-        const url = URL_BACKEND + "/gastos/";
+        if (!usuarioId) {
+            console.warn("No hay usuario logueado.");
+            return;
+        }
+        
+        const url = URL_BACKEND + `/gastos/usuario/${usuarioId}`;
         try {
             const resp = await fetch(url);
             const data = await resp.json();
@@ -79,7 +88,15 @@ const GastosPage = () => {
     };
 
     const httpObtenerCategorias = async () => {
-        const url = URL_BACKEND + "/categorias";
+        const storedUsuario = JSON.parse(sessionStorage.getItem("usuario") || "{}");
+        const usuarioId = storedUsuario?.id ?? null;
+
+        if (!usuarioId) {
+            console.warn("No hay usuario logueado.");
+            return;
+        }
+        
+        const url = URL_BACKEND + `/categorias/usuario/${usuarioId}`;
         try {
             const resp = await fetch(url);
             const data = await resp.json();

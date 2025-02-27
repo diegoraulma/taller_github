@@ -24,6 +24,9 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
   const [monto, setMonto] = useState<number>(0);
 
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  const storedUsuario = JSON.parse(sessionStorage.getItem("usuario") || "{}");
+  const usuarioId = storedUsuario?.id ?? null;
   
   const abrirModalAlerta = () => {
     setShowModal(true);
@@ -60,7 +63,8 @@ const ModalAgregarGasto = (props: AgregarGastoProps) => {
       categoriaId,
       descripcion,
       recurrente: recurrente ? "Sí" : "No", // Convierte booleano en texto
-      monto
+      monto,
+      usuarioId: usuarioId
     };
     const nuevoGastoTotal = (props.categorias.find((c) => c.id === nuevoGasto.categoriaId)?.gastoTotal ?? 0) + nuevoGasto.monto;
     const actualPresupuesto = (props.categorias.find((c) => c.id === nuevoGasto.categoriaId)?.presupuestoTotal ?? 0);

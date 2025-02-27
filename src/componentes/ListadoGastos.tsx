@@ -10,6 +10,7 @@ export interface ListadoGastosItem {
     descripcion: string;
     recurrente: string;
     monto: number;
+    usuarioId?:number;
 }
 
 interface ListadoGastosProps {

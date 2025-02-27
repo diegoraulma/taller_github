@@ -1,3 +1,6 @@
+import { useState } from "react";
+
+
 interface OrdenarGastosProps {
     showModal: boolean;
     onCloseModal: () => void;
@@ -5,13 +8,9 @@ interface OrdenarGastosProps {
 }
 
 const ModalOrdenarGastos = ({ showModal, onCloseModal, onAplicarOrden }: OrdenarGastosProps) => {
-    if (!showModal) return null;
+    const [orden, setOrden] = useState<string>("fecha");  // ✅ Estado para el orden seleccionado
 
-    const aplicarOrden = () => {
-        const orden = (document.getElementById("orden") as HTMLSelectElement).value;
-        onAplicarOrden(orden);
-        onCloseModal();
-    };
+    if (!showModal) return null;
 
     return (
         <>
@@ -26,7 +25,12 @@ const ModalOrdenarGastos = ({ showModal, onCloseModal, onAplicarOrden }: Ordenar
                     <div className="modal-body">
                         <div className="mb-3">
                             <label className="form-label">Ordenar por:</label>
-                            <select id="orden" className="form-select">
+                            <select 
+                                id="orden"
+                                className="form-select"
+                                value={orden}  // ✅ Usa el estado
+                                onChange={(e) => setOrden(e.target.value)}  // ✅ Actualiza el estado
+                            >
                                 <option value="fecha">Fecha</option>
                                 <option value="monto">Monto</option>
                             </select>
@@ -36,7 +40,14 @@ const ModalOrdenarGastos = ({ showModal, onCloseModal, onAplicarOrden }: Ordenar
                         <button type="button" className="btn btn-secondary" onClick={onCloseModal}>
                             Cancelar
                         </button>
-                        <button type="button" className="btn btn-primary" onClick={aplicarOrden}>
+                        <button 
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={() => {
+                                onAplicarOrden(orden);  // ✅ Pasa el orden seleccionado
+                                onCloseModal();
+                            }}
+                        >
                             Aplicar
                         </button>
                     </div>
